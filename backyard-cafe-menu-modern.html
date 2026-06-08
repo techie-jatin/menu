@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Backyard Bistro & Grill — Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0B0B0B;
+  --surface:#131313;
+  --surface-2:#1A1A1A;
+  --border:rgba(255,255,255,0.04);
+  --text:#ECEAE4;
+  --text-dim:rgba(236,234,228,0.3);
+  --text-muted:rgba(236,234,228,0.5);
+  --accent:#0D6B3A;
+  --accent-light:#1A8A4E;
+  --accent-dim:rgba(13,107,58,0.08);
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ====== SUBTLE CARPET TEXTURE ====== */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 48px,rgba(255,255,255,0.008) 48px,rgba(255,255,255,0.008) 49px),
+    repeating-linear-gradient(90deg,transparent,transparent 48px,rgba(255,255,255,0.008) 48px,rgba(255,255,255,0.008) 49px);
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse at 30% 20%,rgba(13,107,58,0.03) 0%,transparent 50%),
+    radial-gradient(ellipse at 70% 80%,rgba(13,107,58,0.02) 0%,transparent 50%);
+  pointer-events:none;z-index:0;
+}
+
+/* ====== ABSTRACT GEOMETRIC BLOCKS ====== */
+.geo-block{
+  position:fixed;
+  pointer-events:none;z-index:0;
+  border:1px solid var(--border);
+  opacity:0.3;
+}
+.geo-block-1{
+  top:120px;right:40px;
+  width:300px;height:300px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(13,107,58,0.04),transparent 70%);
+  border:none;
+}
+.geo-block-2{
+  bottom:200px;left:-80px;
+  width:400px;height:400px;
+  transform:rotate(30deg);
+  background:rgba(255,255,255,0.01);
+}
+.geo-block-3{
+  top:50%;right:-60px;
+  width:200px;height:200px;
+  transform:rotate(45deg);
+  border-color:rgba(13,107,58,0.06);
+}
+
+/* ====== REVEAL ====== */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:0.1s;}
+.reveal-d2{transition-delay:0.2s;}
+.reveal-d3{transition-delay:0.3s;}
+
+/* ====== NAV ====== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;
+  background:rgba(11,11,11,0.85);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:1.1rem;
+  font-weight:500;
+  color:var(--text);
+  text-decoration:none;
+  letter-spacing:-0.02em;
+}
+.nav-logo span{color:var(--accent-light);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{
+  text-decoration:none;
+  font-size:0.75rem;
+  color:var(--text-dim);
+  transition:color 0.3s;
+  font-weight:400;
+  letter-spacing:0.02em;
+}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{
+  background:var(--accent);
+  color:var(--text) !important;
+  padding:0.5rem 1.2rem;
+  font-size:0.7rem !important;
+  font-weight:500 !important;
+  transition:background 0.3s !important;
+}
+.nav-cta:hover{background:var(--accent-light) !important;}
+
+/* ====== HERO ====== */
+.hero{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:8rem 2rem 4rem;
+  overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;z-index:0;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  grid-template-rows:repeat(6,1fr);
+  pointer-events:none;
+}
+.hero-grid span{
+  border:1px solid var(--border);
+  opacity:0.15;
+}
+.hero-grid span:nth-child(10),
+.hero-grid span:nth-child(14),
+.hero-grid span:nth-child(21),
+.hero-grid span:nth-child(27){
+  background:rgba(13,107,58,0.03);
+}
+
+.hero-eyebrow{
+  font-size:0.7rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-bottom:1rem;
+  font-weight:400;
+}
+.hero-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(3rem,10vw,7rem);
+  font-weight:600;
+  color:var(--text);
+  line-height:1.05;
+  letter-spacing:-0.03em;
+}
+.hero-title em{
+  font-style:normal;
+  color:var(--accent-light);
+}
+.hero-sub{
+  font-size:0.85rem;
+  color:var(--text-muted);
+  margin-top:1.2rem;
+  font-weight:300;
+  letter-spacing:0.05em;
+}
+.hero-bar{
+  display:flex;gap:0.3rem;
+  margin-top:2.5rem;
+}
+.hero-bar span{
+  display:block;
+  width:40px;height:3px;
+  background:var(--border);
+  border-radius:2px;
+  transition:background 0.5s;
+}
+.hero-bar span:nth-child(2){background:var(--accent);width:60px;}
+.hero-bar span:nth-child(3){background:var(--border);}
+
+/* Coffee cup — minimal block frame */
+.hero-cup-frame{
+  position:absolute;
+  right:6%;bottom:12%;
+  width:120px;height:120px;
+  border:1px solid var(--border);
+  overflow:hidden;
+  opacity:0.15;
+  pointer-events:none;
+}
+.hero-cup-frame img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  filter:grayscale(1);
+}
+.hero-cup-frame-2{
+  position:absolute;
+  left:8%;bottom:20%;
+  width:80px;height:80px;
+  border:1px solid var(--border);
+  background:rgba(13,107,58,0.02);
+  pointer-events:none;
+}
+
+/* ====== MENU ====== */
+.menu-section{
+  position:relative;z-index:1;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.menu-inner{
+  max-width:960px;
+  margin:0 auto;
+  padding:5rem 2rem;
+}
+
+.menu-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:3rem;
+  padding-bottom:1.5rem;
+  border-bottom:1px solid var(--border);
+}
+.menu-header-left{}
+.menu-header-eyebrow{
+  font-size:0.65rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  display:block;margin-bottom:0.4rem;
+}
+.menu-header h2{
+  font-size:clamp(1.6rem,4vw,2.4rem);
+  font-weight:500;
+  letter-spacing:-0.02em;
+}
+.menu-header h2 em{font-style:normal;color:var(--accent-light);}
+.menu-header-right{
+  text-align:right;
+  font-size:0.7rem;
+  color:var(--text-dim);
+}
+
+/* Cat tabs */
+.cat-tabs{
+  display:flex;gap:0.15rem;
+  margin-bottom:3rem;
+  background:var(--surface);
+  padding:0.25rem;
+  width:fit-content;
+  border:1px solid var(--border);
+  overflow-x:auto;
+}
+.cat-tab{
+  border:none;background:none;cursor:pointer;
+  padding:0.5rem 1rem;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:0.65rem;
+  color:var(--text-dim);
+  transition:all 0.3s;
+  white-space:nowrap;
+  font-weight:400;
+}
+.cat-tab:hover{color:var(--text);}
+.cat-tab.active{
+  background:var(--accent);
+  color:var(--text);
+}
+
+.menu-list{display:none;animation:fadeIn 0.3s ease;}
+.menu-list.active{display:block;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+/* Menu grid */
+.menu-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+}
+.menu-item{
+  display:flex;gap:1rem;
+  padding:1.2rem 0;
+  border-bottom:1px solid var(--border);
+  align-items:center;
+}
+.menu-item:nth-last-child(-n+2){border-bottom:none;}
+/* Two-column: odd items get right border */
+.menu-item:nth-child(odd){
+  border-right:1px solid var(--border);
+  padding-right:1.5rem;
+}
+.menu-item:nth-child(even){
+  padding-left:1.5rem;
+}
+
+.item-img-wrap{
+  width:64px;height:64px;
+  flex-shrink:0;
+  overflow:hidden;
+  cursor:pointer;
+  border:1px solid var(--border);
+  background:var(--surface);
+}
+.item-img-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  transition:opacity 0.3s;
+}
+.item-img-wrap:hover img{opacity:0.8;}
+.item-img-placeholder{
+  width:64px;height:64px;
+  flex-shrink:0;
+  background:var(--surface);
+  border:1px dashed var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;
+  color:var(--text-dim);
+}
+
+.item-body{flex:1;min-width:0;}
+.item-name{
+  font-size:0.9rem;
+  font-weight:500;
+  color:var(--text);
+  letter-spacing:-0.01em;
+}
+.item-note{
+  font-size:0.7rem;
+  color:var(--text-dim);
+  margin-top:0.1rem;
+  font-weight:300;
+}
+.item-meta{
+  display:flex;align-items:center;gap:0.6rem;
+  margin-top:0.3rem;
+}
+.item-price{
+  font-size:0.85rem;
+  font-weight:500;
+  color:var(--accent-light);
+}
+.item-price small{
+  font-size:0.5rem;
+  color:var(--text-dim);
+  margin-left:0.3rem;
+  text-transform:uppercase;
+  font-weight:400;
+  letter-spacing:0.05em;
+}
+.item-badge{
+  font-size:0.45rem;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color:var(--accent-light);
+  border:1px solid var(--accent-dim);
+  padding:0.1rem 0.4rem;
+  font-weight:500;
+}
+
+/* ====== DIVIDER BLOCK ====== */
+.divider-block{
+  height:1px;
+  background:linear-gradient(to right,transparent,var(--accent),transparent);
+  opacity:0.15;
+  margin:0;
+}
+
+/* ====== SPECIALS ====== */
+.specials-section{
+  position:relative;z-index:1;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--surface);
+}
+.specials-inner{
+  max-width:700px;
+  margin:0 auto;
+  padding:5rem 2rem;
+  text-align:center;
+}
+.specials-label{
+  font-size:0.65rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  display:block;margin-bottom:0.8rem;
+}
+.specials-title{
+  font-size:clamp(1.6rem,4vw,2.6rem);
+  font-weight:500;
+  letter-spacing:-0.02em;
+  line-height:1.15;
+}
+.specials-title em{font-style:normal;color:var(--accent-light);}
+.specials-desc{
+  font-size:0.85rem;
+  color:var(--text-muted);
+  line-height:1.7;
+  max-width:480px;
+  margin:1rem auto 0;
+  font-weight:300;
+}
+.specials-line{
+  width:60px;height:2px;
+  background:var(--accent);
+  margin:1.2rem auto 0;
+  border-radius:1px;
+}
+
+/* ====== ABOUT ====== */
+.about-section{
+  position:relative;z-index:1;
+  border-top:1px solid var(--border);
+}
+.about-inner{
+  max-width:960px;
+  margin:0 auto;
+  padding:5rem 2rem;
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:3rem;
+  align-items:center;
+}
+.about-img-wrap{
+  width:200px;height:200px;
+  border:1px solid var(--border);
+  overflow:hidden;
+  background:var(--surface);
+}
+.about-img-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  filter:grayscale(0.6);
+  transition:filter 0.5s;
+}
+.about-img-wrap:hover img{filter:grayscale(0);}
+.about-text blockquote{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.2rem,3vw,1.6rem);
+  font-weight:300;
+  font-style:italic;
+  color:var(--text);
+  line-height:1.5;
+  margin-bottom:0.8rem;
+}
+.about-text p{
+  font-size:0.8rem;
+  line-height:1.7;
+  color:var(--text-muted);
+  margin-bottom:0.8rem;
+  font-weight:300;
+}
+.about-links{
+  display:flex;gap:1.2rem;flex-wrap:wrap;
+}
+.about-link{
+  display:flex;align-items:center;gap:0.3rem;
+  font-size:0.65rem;
+  color:var(--text-dim);
+  text-decoration:none;
+  border-bottom:1px solid var(--border);
+  padding-bottom:0.2rem;
+  transition:color 0.3s,border-color 0.3s;
+}
+.about-link:hover{color:var(--accent-light);border-color:var(--accent);}
+.about-link svg{width:12px;height:12px;fill:currentColor;}
+
+/* ====== FOOTER ====== */
+footer{
+  padding:3rem 2rem 2rem;
+  position:relative;z-index:1;
+  border-top:1px solid var(--border);
+}
+.footer-bar{
+  width:100%;height:1px;
+  background:linear-gradient(to right,transparent,var(--accent),transparent);
+  opacity:0.08;
+  margin-bottom:2rem;
+}
+.footer-inner{
+  max-width:960px;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  gap:2rem;
+}
+.footer-brand{
+  font-size:1.1rem;
+  font-weight:500;
+  letter-spacing:-0.02em;
+  margin-bottom:0.3rem;
+}
+.footer-brand span{color:var(--accent-light);}
+.footer-tagline{
+  font-size:0.7rem;
+  color:var(--text-dim);
+}
+.footer-social{display:flex;gap:0.8rem;margin-top:1rem;}
+.footer-social a{color:var(--text-dim);transition:color 0.3s;}
+.footer-social a:hover{color:var(--accent-light);}
+.footer-social svg{width:16px;height:16px;fill:currentColor;}
+
+.footer-heading{
+  font-size:0.6rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  margin-bottom:0.8rem;
+}
+.footer-list{list-style:none;}
+.footer-list li{
+  font-size:0.75rem;
+  color:var(--text-muted);
+  margin-bottom:0.4rem;
+  font-weight:300;
+}
+.footer-list a{color:inherit;text-decoration:none;}
+.footer-list a:hover{color:var(--accent-light);}
+
+.footer-bottom{
+  max-width:960px;margin:2rem auto 0;
+  padding-top:1rem;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;
+  font-size:0.55rem;
+  color:var(--text-dim);
+}
+
+/* ====== LIGHTBOX ====== */
+.lightbox{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,0.92);
+  display:none;
+  justify-content:center;align-items:center;
+  cursor:pointer;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+}
+.lightbox.active{display:flex;}
+.lightbox img{
+  max-width:90%;max-height:85%;
+  object-fit:contain;
+}
+.lightbox-close{
+  position:absolute;top:1.5rem;right:1.5rem;
+  background:none;border:none;color:var(--text);
+  font-size:1.5rem;cursor:pointer;opacity:0.3;
+  transition:opacity 0.3s;
+}
+.lightbox-close:hover{opacity:0.7;}
+
+/* ====== RESPONSIVE ====== */
+@media(max-width:1024px){
+  .menu-grid{grid-template-columns:1fr;}
+  .menu-item:nth-child(odd){border-right:none;padding-right:0;}
+  .menu-item:nth-child(even){padding-left:0;}
+  .menu-item:last-child{border-bottom:none;}
+  .about-inner{grid-template-columns:1fr;gap:2rem;}
+  .footer-inner{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  nav{padding:0 1.5rem;height:56px;}
+  .nav-logo{font-size:1rem;}
+  .nav-links{display:none;}
+  .hero{padding:6rem 1.5rem 3rem;}
+  .hero-title{font-size:clamp(2.5rem,12vw,4rem);}
+  .hero-cup-frame{width:80px;height:80px;}
+  .hero-cup-frame-2{display:none;}
+  .hero-grid span{display:none;}
+  .hero-grid span:nth-child(-n+6){display:block;}
+  .menu-inner{padding:3rem 1.5rem;}
+  .menu-header{flex-direction:column;align-items:flex-start;gap:0.5rem;}
+  .menu-item{padding:1rem 0;}
+  .specials-inner{padding:3rem 1.5rem;}
+  .about-inner{padding:3rem 1.5rem;}
+  .about-img-wrap{width:160px;height:160px;}
+  footer{padding:2rem 1.5rem 1.5rem;}
+  .footer-inner{grid-template-columns:1fr;gap:1.5rem;}
+  .footer-bottom{flex-direction:column;gap:0.3rem;}
+}
+@media(max-width:480px){
+  nav{padding:0 1rem;height:50px;}
+  .hero{padding:5rem 1rem 2.5rem;}
+  .hero-title{font-size:clamp(2rem,14vw,3rem);}
+  .hero-eyebrow{font-size:0.6rem;}
+  .hero-sub{font-size:0.75rem;}
+  .hero-bar span{width:28px;}
+  .hero-bar span:nth-child(2){width:40px;}
+  .hero-cup-frame{display:none;}
+  .menu-inner{padding:2rem 1rem;}
+  .cat-tabs{padding:0.15rem;}
+  .cat-tab{font-size:0.55rem;padding:0.4rem 0.7rem;}
+  .item-name{font-size:0.8rem;}
+  .item-note{font-size:0.65rem;}
+  .item-img-wrap,.item-img-placeholder{width:50px;height:50px;}
+  .item-img-placeholder{font-size:0.9rem;}
+  .specials-inner{padding:2rem 1rem;}
+  .specials-title{font-size:clamp(1.3rem,8vw,1.8rem);}
+  .specials-desc{font-size:0.75rem;}
+  .about-inner{padding:2rem 1rem;}
+  .about-img-wrap{width:130px;height:130px;margin:0 auto;}
+  .about-text blockquote{font-size:1rem;}
+  .about-text p{font-size:0.75rem;}
+}
+@media(max-height:500px){
+  .hero{min-height:110vh;padding:5rem 1rem 2rem;}
+  .hero-cup-frame,.hero-cup-frame-2{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="geo-block geo-block-1"></div>
+<div class="geo-block geo-block-2"></div>
+<div class="geo-block geo-block-3"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">The <span>Backyard</span></a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#specials">Specials</a></li>
+    <li><a href="#find-us">Find Us</a></li>
+    <li><a href="#menu" class="nav-cta">Order</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="hero-cup-frame"><img src="Flat paper coffee cup.jpg" alt="" loading="lazy"></div>
+  <div class="hero-cup-frame-2"></div>
+
+  <p class="hero-eyebrow reveal">Belgaum's Open-Air Bistro & Grill</p>
+  <h1 class="hero-title reveal reveal-d1">The <em>Backyard</em></h1>
+  <p class="hero-sub reveal reveal-d2">Open air · Craft coffee · Wood-fired grill · Good vibes</p>
+  <div class="hero-bar reveal reveal-d3">
+    <span></span><span></span><span></span>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-inner">
+    <div class="menu-header reveal">
+      <div class="menu-header-left">
+        <span class="menu-header-eyebrow">Crafted with care</span>
+        <h2>Coffee & <em>Creations</em></h2>
+      </div>
+      <div class="menu-header-right">✦ Est. 2026</div>
+    </div>
+
+    <div class="cat-tabs reveal reveal-d1">
+      <button class="cat-tab active" data-cat="hot">Hot Coffee</button>
+      <button class="cat-tab" data-cat="iced">Iced & Cold</button>
+      <button class="cat-tab" data-cat="frappe">Frappés</button>
+      <button class="cat-tab" data-cat="shake">Shakes</button>
+      <button class="cat-tab" data-cat="addons">Add-ons</button>
+    </div>
+
+    <div class="menu-grid active" id="list-hot">
+      <div class="menu-item reveal"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Espresso</div><div class="item-note">Pure, bold single shot</div><div class="item-meta"><span class="item-price">₹99</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Double Espresso</div><div class="item-note">Double the strength</div><div class="item-meta"><span class="item-price">₹129</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Americano</div><div class="item-note">Smooth black coffee</div><div class="item-meta"><span class="item-price">₹139</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Cortado</div><div class="item-note">Espresso cut with warm milk</div><div class="item-meta"><span class="item-price">₹149</span></div></div></div>
+      <div class="menu-item reveal reveal-d2"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Lavender Latte</div><div class="item-note">Floral & creamy indulgence</div><div class="item-meta"><span class="item-price">₹179</span></div></div></div>
+      <div class="menu-item reveal reveal-d2"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Hazelnut Latte</div><div class="item-note">Nutty, rich & comforting</div><div class="item-meta"><span class="item-price">₹179</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Vanilla Latte</div><div class="item-note">Classic smooth vanilla</div><div class="item-meta"><span class="item-price">₹169</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Chocolate Hazelnut Latte</div><div class="item-note">Double the indulgence</div><div class="item-meta"><span class="item-price">₹199</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Tiramisu Latte</div><div class="item-note">Coffee & cream dessert</div><div class="item-meta"><span class="item-price">₹199</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Lotus Biscoff Latte</div><div class="item-note">Caramelised biscuit heaven</div><div class="item-meta"><span class="item-price">₹199</span></div></div></div>
+      <div class="menu-item reveal reveal-d2"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Café Latte</div><div class="item-note">Smooth milk & espresso</div><div class="item-meta"><span class="item-price">₹159</span></div></div></div>
+      <div class="menu-item reveal reveal-d2"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Cappuccino</div><div class="item-note">Frothy classic</div><div class="item-meta"><span class="item-price">₹159</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Mocha</div><div class="item-note">Chocolate coffee bliss</div><div class="item-meta"><span class="item-price">₹179</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Hot Chocolate</div><div class="item-note">Rich, warm chocolate</div><div class="item-meta"><span class="item-price">₹159</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">White Hot Chocolate</div><div class="item-note">Creamy white chocolate</div><div class="item-meta"><span class="item-price">₹179</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Masala Chai</div><div class="item-note">Indian spiced tea</div><div class="item-meta"><span class="item-price">₹119</span></div></div></div>
+      <div class="menu-item reveal reveal-d2"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Chai Latte</div><div class="item-note">Spiced tea & milk cloud</div><div class="item-meta"><span class="item-price">₹159</span></div></div></div>
+      <div class="menu-item reveal reveal-d2"><div class="item-img-placeholder">☕</div><div class="item-body"><div class="item-name">Tulsi & Ginger Tea</div><div class="item-note">Herbal immune boost</div><div class="item-meta"><span class="item-price">₹119</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">🍵</div><div class="item-body"><div class="item-name">Green Tea</div><div class="item-note">Light & refreshing</div><div class="item-meta"><span class="item-price">₹119</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">🍵</div><div class="item-body"><div class="item-name">Lemon & Honey Tea</div><div class="item-note">Soothing citrus warmth</div><div class="item-meta"><span class="item-price">₹119</span></div></div></div>
+    </div>
+
+    <div class="menu-grid" id="list-iced">
+      <div class="menu-item reveal"><div class="item-img-placeholder">🧊</div><div class="item-body"><div class="item-name">Cold Brew</div><div class="item-note">Slow-steeped, bold & silky</div><div class="item-meta"><span class="item-price">₹179</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">🧊</div><div class="item-body"><div class="item-name">Iced Latte</div><div class="item-note">Chilled classic</div><div class="item-meta"><span class="item-price">₹169</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">🧊</div><div class="item-body"><div class="item-name">Iced Mocha</div><div class="item-note">Chocolate chilled coffee</div><div class="item-meta"><span class="item-price">₹189</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">🧊</div><div class="item-body"><div class="item-name">Iced Americano</div><div class="item-note">Black coffee on ice</div><div class="item-meta"><span class="item-price">₹149</span></div></div></div>
+      <div class="menu-item reveal reveal-d2"><div class="item-img-placeholder">🧊</div><div class="item-body"><div class="item-name">Iced Caramel Macchiato</div><div class="item-note">Layered caramel beauty</div><div class="item-meta"><span class="item-price">₹169</span></div></div></div>
+      <div class="menu-item reveal reveal-d2"><div class="item-img-placeholder">🧊</div><div class="item-body"><div class="item-name">Iced Caramel Latte</div><div class="item-note">Sweet golden caramel</div><div class="item-meta"><span class="item-price">₹179</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">🧊</div><div class="item-body"><div class="item-name">Iced Hazelnut Latte</div><div class="item-note">Nutty on ice</div><div class="item-meta"><span class="item-price">₹189</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">🧊</div><div class="item-body"><div class="item-name">Iced Vanilla Latte</div><div class="item-note">Creamy cold vanilla</div><div class="item-meta"><span class="item-price">₹179</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">🧊</div><div class="item-body"><div class="item-name">Iced Lavender Latte</div><div class="item-note">Floral chill</div><div class="item-meta"><span class="item-price">₹189</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">🧊</div><div class="item-body"><div class="item-name">Iced Lotus Biscoff Latte</div><div class="item-note">Biscuit chilled delight</div><div class="item-meta"><span class="item-price">₹199</span></div></div></div>
+    </div>
+
+    <div class="menu-grid" id="list-frappe">
+      <div class="menu-item reveal"><div class="item-img-wrap"><img src="tpb.jpg" alt="" loading="lazy" onclick="openLightbox(this)"></div><div class="item-body"><div class="item-name">Twisted Brownie Frappe</div><div class="item-note">Brownie meets frappé dream</div><div class="item-meta"><span class="item-price">₹229</span><span class="item-badge">House Special</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">🥤</div><div class="item-body"><div class="item-name">Caramel Frappe</div><div class="item-note">Buttery caramel bliss</div><div class="item-meta"><span class="item-price">₹199</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">🥤</div><div class="item-body"><div class="item-name">Chocolate Frappe</div><div class="item-note">Rich chocolate indulgence</div><div class="item-meta"><span class="item-price">₹199</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">🥤</div><div class="item-body"><div class="item-name">Lotus Biscoff Frappe</div><div class="item-note">Biscoff blended to perfection</div><div class="item-meta"><span class="item-price">₹229</span></div></div></div>
+      <div class="menu-item reveal reveal-d2"><div class="item-img-placeholder">🥤</div><div class="item-body"><div class="item-name">Coffee Frappe</div><div class="item-note">Classic coffee chill</div><div class="item-meta"><span class="item-price">₹179</span></div></div></div>
+    </div>
+
+    <div class="menu-grid" id="list-shake">
+      <div class="menu-item reveal"><div class="item-img-placeholder">🥛</div><div class="item-body"><div class="item-name">Chocolate Shake</div><div class="item-note">Rich velvety chocolate</div><div class="item-meta"><span class="item-price">₹199</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">🥛</div><div class="item-body"><div class="item-name">Strawberry Shake</div><div class="item-note">Berry & creamy</div><div class="item-meta"><span class="item-price">₹199</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">🥛</div><div class="item-body"><div class="item-name">Oreo Shake</div><div class="item-note">Cookie cream perfection</div><div class="item-meta"><span class="item-price">₹219</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">🥛</div><div class="item-body"><div class="item-name">Kit Kat Shake</div><div class="item-note">Crunchy wafer blended</div><div class="item-meta"><span class="item-price">₹229</span></div></div></div>
+      <div class="menu-item reveal reveal-d2"><div class="item-img-placeholder">🥛</div><div class="item-body"><div class="item-name">Snickers Shake</div><div class="item-note">Caramel nut indulgence</div><div class="item-meta"><span class="item-price">₹239</span></div></div></div>
+    </div>
+
+    <div class="menu-grid" id="list-addons">
+      <div class="menu-item reveal"><div class="item-img-placeholder">➕</div><div class="item-body"><div class="item-name">Extra Espresso Shot</div><div class="item-note">Kick it up a notch</div><div class="item-meta"><span class="item-price">₹30</span></div></div></div>
+      <div class="menu-item reveal"><div class="item-img-placeholder">➕</div><div class="item-body"><div class="item-name">Flavour Syrup</div><div class="item-note">Vanilla, caramel or hazelnut</div><div class="item-meta"><span class="item-price">₹30</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">➕</div><div class="item-body"><div class="item-name">Soy / Oat / Almond Milk</div><div class="item-note">Plant-based alternative</div><div class="item-meta"><span class="item-price">₹40</span></div></div></div>
+      <div class="menu-item reveal reveal-d1"><div class="item-img-placeholder">➕</div><div class="item-body"><div class="item-name">Whipped Cream</div><div class="item-note">Fluffy cloud topping</div><div class="item-meta"><span class="item-price">₹30</span></div></div></div>
+      <div class="menu-item reveal reveal-d2"><div class="item-img-placeholder">➕</div><div class="item-body"><div class="item-name">Chocolate Drizzle</div><div class="item-note">Decadent chocolate finish</div><div class="item-meta"><span class="item-price">₹30</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-block"></div>
+
+<!-- SPECIALS -->
+<section class="specials-section" id="specials">
+  <div class="specials-inner">
+    <span class="specials-label reveal">From our kitchen to your table</span>
+    <h2 class="specials-title reveal reveal-d1">Beyond the <em>ordinary.</em><br>Crafted for the bold.</h2>
+    <p class="specials-desc reveal reveal-d2">From the Twisted Brownie Frappe to the Lotus Biscoff Latte to our wood-fired grill specials — every creation tells the story of our backyard.</p>
+    <div class="specials-line reveal reveal-d3"></div>
+  </div>
+</section>
+
+<div class="divider-block"></div>
+
+<!-- ABOUT -->
+<section class="about-section" id="find-us">
+  <div class="about-inner">
+    <div class="about-img-wrap reveal">
+      <img src="Coloured chefdesign.jpg" alt="" loading="lazy">
+    </div>
+    <div class="about-text reveal reveal-d1">
+      <blockquote>"A lush open-air escape where nature meets the grill, and every meal feels like a getaway."</blockquote>
+      <p>Tucked away in Belgaum's heartbeat, The Backyard is where lush greenery meets bold flavours. Whether you're here for a morning brew, a wood-fired grill feast, or an evening under the stars with friends — this is your place to breathe.</p>
+      <p>We serve every plate with passion, pour every drink with purpose, and keep every corner wrapped in nature so you never want to leave.</p>
+      <div class="about-links">
+        <a href="https://maps.app.goo.gl/u6wFLSaS5iw9HZvk9" target="_blank" class="about-link">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Find on Maps
+        </a>
+        <a href="https://www.instagram.com/thebackyard_belgaum/" target="_blank" class="about-link">
+          <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+          Follow on Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-block"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bar"></div>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">The <span>Backyard</span></div>
+      <p class="footer-tagline">Bistro & Grill · Belgaum</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/thebackyard_belgaum/" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-heading">Visit</p>
+      <ul class="footer-list">
+        <li>Belgaum, Karnataka</li>
+        <li>Open Air · Craft Coffee</li>
+        <li>Wood-fired Grill</li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-heading">Connect</p>
+      <ul class="footer-list">
+        <li><a href="https://maps.app.goo.gl/u6wFLSaS5iw9HZvk9" target="_blank">Find on Maps →</a></li>
+        <li><a href="https://www.instagram.com/thebackyard_belgaum/" target="_blank">Instagram →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 The Backyard Bistro & Grill</span>
+    <span>Open air · Good vibes</span>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+document.querySelectorAll('.cat-tab').forEach(t => {
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.cat-tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.querySelectorAll('.menu-grid').forEach(g=>g.classList.remove('active'));
+    const g=document.getElementById('list-'+t.dataset.cat);
+    if(g)g.classList.add('active');
+  });
+});
+const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(e=>obs.observe(e));
+function openLightbox(i){const l=document.getElementById('lightbox');document.getElementById('lightboxImg').src=i.src;l.classList.add('active');document.body.style.overflow='hidden';}
+function closeLightbox(e){if(e)e.stopPropagation();document.getElementById('lightbox').classList.remove('active');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+</script>
+</body>
+</html>

@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Backyard Bistro & Grill — Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #F5EFE0;
+    --parchment: #EDE3CC;
+    --warm-brown: #3D2B1F;
+    --night-sky: #141F14;
+    --coffee: #6B3E26;
+    --caramel: #C4883E;
+    --gold: #D4A843;
+    --sage: #6A8E5E;
+    --moss: #3D6B3A;
+    --bark: #5C3D2E;
+    --terracotta: #A85A3A;
+    --steam: rgba(245,239,224,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--night-sky);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease-out, width 0.4s, height 0.4s, opacity 0.3s;
+    opacity: 0.6;
+  }
+  body:has(a:hover) .cursor, body:has(.menu-item:hover) .cursor { width: 4px; height: 4px; }
+  body:has(a:hover) .cursor-ring, body:has(.menu-item:hover) .cursor-ring { width: 56px; height: 56px; opacity: 0.3; }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 4rem 2rem;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 90% 65% at 50% 45%, #2A3D1A 0%, var(--night-sky) 70%);
+  }
+
+  /* Animated coffee rings */
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(106,142,94,0.15);
+    animation: expand 8s ease-out infinite;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .ring:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
+  .ring:nth-child(2) { width: 500px; height: 500px; animation-delay: 2s; }
+  .ring:nth-child(3) { width: 700px; height: 700px; animation-delay: 4s; }
+  .ring:nth-child(4) { width: 900px; height: 900px; animation-delay: 6s; }
+
+  @keyframes expand {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    20% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+  }
+
+  /* Steam lines */
+  .steam-wrap {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 300px; pointer-events: none;
+    overflow: hidden;
+  }
+  .steam-line {
+    position: absolute; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to top, rgba(106,142,94,0.2), transparent);
+    animation: rise 6s ease-in-out infinite;
+  }
+  @keyframes rise {
+    0% { height: 0; opacity: 0; transform: translateX(0); }
+    30% { opacity: 1; }
+    100% { height: 280px; opacity: 0; transform: translateX(20px); }
+  }
+
+  /* Leaf decorations */
+  .leaf {
+    position: absolute;
+    font-size: 0;
+    width: 60px; height: 30px;
+    border-radius: 50% 0 50% 0;
+    background: var(--moss);
+    opacity: 0.35;
+    animation: sway 6s ease-in-out infinite;
+  }
+  .leaf-variegated {
+    background: linear-gradient(135deg, var(--moss), var(--sage));
+    opacity: 0.25;
+  }
+  @keyframes sway {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(8deg); }
+  }
+
+  /* String lights */
+  .string-lights {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 120px;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .string-lights svg {
+    width: 100%; height: 100%;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 2rem;
+    position: relative; z-index: 2;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.3s;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 400;
+    line-height: 0.9;
+    text-align: center;
+    position: relative; z-index: 2;
+    color: var(--cream);
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.6s;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,239,224,0.5);
+    margin-top: 2rem;
+    position: relative; z-index: 2;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.9s;
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 3rem; left: 0; right: 0;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.5s;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .hero-scroll span {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--caramel);
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--caramel), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Nav */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    padding: 1.5rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(20,31,20,0.92), transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--cream);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+  .nav-logo span { color: var(--gold); font-style: italic; }
+  .nav-links {
+    display: flex; gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(245,239,224,0.6);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: var(--terracotta);
+    padding: 0.6rem 1.4rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--caramel); transform: translateY(-1px); }
+
+  /* Section shells */
+  section { padding: 7rem 0; }
+
+  .section-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  /* Divider */
+  .ornament {
+    display: flex; align-items: center; gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+    color: var(--caramel);
+  }
+  .ornament::before, .ornament::after {
+    content: ''; flex: 1;
+    max-width: 80px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--sage));
+  }
+  .ornament::after { background: linear-gradient(to left, transparent, var(--sage)); }
+  .ornament-dot {
+    width: 4px; height: 4px;
+    background: var(--caramel);
+    border-radius: 50%;
+  }
+
+  /* ============ MENU SECTION ============ */
+  .menu-section {
+    position: relative;
+    background: var(--night-sky);
+  }
+
+  .menu-container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .menu-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .menu-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.1;
+  }
+  .menu-title em { color: var(--gold); font-style: italic; }
+
+  /* Category tabs */
+  .cat-tabs {
+    display: flex; gap: 0; justify-content: center;
+    flex-wrap: wrap;
+    margin: 2.5rem 0 3rem;
+  }
+  .cat-tab {
+    background: none; border: none; cursor: pointer;
+    padding: 0.65rem 1.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,239,224,0.35);
+    transition: color 0.3s, background 0.3s;
+    white-space: nowrap;
+    border-radius: 100px;
+    margin: 0.2rem;
+  }
+  .cat-tab:hover { color: var(--cream); background: rgba(245,239,224,0.05); }
+  .cat-tab.active { color: var(--night-sky); background: var(--gold); }
+
+  /* Menu list */
+  .menu-list {
+    display: none;
+    animation: listFade 0.35s ease;
+  }
+  .menu-list.active { display: block; }
+
+  @keyframes listFade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .menu-item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(106,142,94,0.08);
+    cursor: default;
+  }
+  .menu-item:last-child { border-bottom: none; }
+
+  .item-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+  }
+  .item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--cream);
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+  }
+  .item-note {
+    font-size: 0.85rem;
+    color: rgba(245,239,224,0.35);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 90%;
+  }
+  .item-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.35rem;
+  }
+  .item-badge {
+    display: inline-block;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(212,168,67,0.25);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+  }
+  .item-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--cream);
+    white-space: nowrap;
+  }
+  .item-price small {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,239,224,0.25);
+    margin-left: 0.4rem;
+    text-transform: uppercase;
+  }
+
+  /* Zomato/Swiggy style image */
+  .item-img-wrap {
+    width: 150px;
+    min-height: 110px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+    cursor: pointer;
+    align-self: stretch;
+    display: flex;
+  }
+  .item-img-wrap img {
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+    display: block;
+  }
+  .item-img-wrap:hover img { transform: scale(1.04); }
+  .item-img-placeholder {
+    width: 150px;
+    min-height: 110px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    align-self: stretch;
+    background: rgba(106,142,94,0.04);
+    border: 1px dashed rgba(106,142,94,0.1);
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed; inset: 0;
+    z-index: 10000;
+    background: rgba(0,0,0,0.92);
+    justify-content: center; align-items: center;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 92vw; max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    animation: lightboxIn 0.3s ease;
+  }
+  @keyframes lightboxIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .lightbox-close {
+    position: absolute; top: 1.5rem; right: 2rem;
+    color: rgba(245,239,224,0.5);
+    font-size: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: color 0.3s;
+    line-height: 1;
+  }
+  .lightbox-close:hover { color: var(--cream); }
+
+  /* Texture strip */
+  .texture-strip {
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--sage) 15%, var(--gold) 45%, var(--terracotta) 65%, var(--sage) 85%, transparent);
+    margin: 5rem 0;
+    opacity: 0.4;
+  }
+
+  /* ============ ABOUT STRIP ============ */
+  .about-strip {
+    background: linear-gradient(135deg, #1A2A18, #141F14);
+    border-top: 1px solid rgba(106,142,94,0.15);
+    border-bottom: 1px solid rgba(106,142,94,0.15);
+    padding: 6rem 3rem;
+  }
+
+  .about-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--cream);
+    position: relative;
+    padding-left: 2rem;
+    border-left: 2px solid var(--sage);
+  }
+
+  .about-text p {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: rgba(245,239,224,0.55);
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .about-links {
+    display: flex; gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  .about-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(106,142,94,0.35);
+    padding-bottom: 0.3rem;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .about-link:hover { color: var(--gold); border-color: var(--gold); }
+  .about-link svg { width: 14px; height: 14px; fill: currentColor; }
+
+  /* ============ SPECIALS HERO ============ */
+  .specials-callout {
+    text-align: center;
+    padding: 5rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .specials-callout::before {
+    content: 'SPECIALS';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 18vw;
+    font-weight: 700;
+    color: rgba(106,142,94,0.04);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+  }
+
+  .specials-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  .specials-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .specials-title em { color: var(--gold); font-style: italic; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    background: #0D120D;
+    border-top: 1px solid rgba(106,142,94,0.12);
+    padding: 4rem 3rem 3rem;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+  .footer-brand em { color: var(--gold); font-style: italic; }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: rgba(245,239,224,0.35);
+    font-style: italic;
+    line-height: 1.7;
+  }
+  .footer-heading {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 1.5rem;
+  }
+  .footer-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.8rem;
+  }
+  .footer-list li {
+    font-size: 0.85rem;
+    color: rgba(245,239,224,0.4);
+    line-height: 1.5;
+  }
+  .footer-list a {
+    color: rgba(245,239,224,0.4);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-list a:hover { color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid rgba(106,142,94,0.12);
+    padding-top: 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-copy {
+    font-size: 0.7rem;
+    color: rgba(245,239,224,0.2);
+    letter-spacing: 0.1em;
+  }
+  .footer-social {
+    display: flex; gap: 1.5rem;
+  }
+  .footer-social a {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,239,224,0.3);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-social a:hover { color: var(--gold); }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .menu-container { max-width: 100%; padding: 0 2rem; }
+    .about-inner { gap: 4rem; }
+    .footer-inner { gap: 3rem; }
+    .ring:nth-child(4) { display: none; }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    html { font-size: 15px; }
+    section { padding: 4rem 0; }
+
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-logo { font-size: 1rem; }
+
+    .hero { padding: 3rem 1.5rem; min-height: 85vh; }
+    .hero-title { font-size: clamp(3rem, 10vw, 4.5rem); }
+    .hero-sub { font-size: 0.9rem; margin-top: 1.5rem; }
+    .hero-eyebrow { font-size: 0.6rem; margin-bottom: 1.5rem; }
+    .hero-scroll { bottom: 2rem; }
+    .ring { display: none; }
+    .ring:nth-child(1) { display: block; width: 200px; height: 200px; }
+    .leaf { display: none; }
+    .leaf:nth-child(-n+3) { display: block; }
+    .string-lights { height: 80px; }
+    .string-lights svg circle { r: 2; }
+
+    .menu-container { padding: 0 1.5rem; }
+    .menu-header { margin-bottom: 2.5rem; }
+    .menu-title { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+    .cat-tabs { margin: 1.5rem 0 2rem; gap: 0.3rem; }
+    .cat-tab { padding: 0.6rem 1rem; font-size: 0.6rem; }
+
+    .menu-item { padding: 1rem 0; gap: 0.75rem; }
+    .item-name { font-size: 1.1rem; }
+    .item-note { max-width: 100%; font-size: 0.75rem; }
+    .item-meta { gap: 0.6rem; }
+    .item-price { font-size: 1rem; }
+    .item-img-wrap, .item-img-placeholder { width: 85px; min-height: 70px; border-radius: 6px; }
+
+    .about-strip { padding: 4rem 1.5rem; }
+    .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-quote { font-size: clamp(1.3rem, 4vw, 1.6rem); padding-left: 1.2rem; }
+    .about-text p { font-size: 0.85rem; }
+    .about-links { gap: 1rem; }
+
+    .specials-callout { padding: 3rem 1.5rem; }
+    .specials-title { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+
+    footer { padding: 3rem 1.5rem 2rem; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-brand { font-size: 1.6rem; }
+    .footer-bottom { flex-direction: column; text-align: center; gap: 0.8rem; }
+    .footer-copy { font-size: 0.6rem; }
+
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+  }
+
+  /* Small mobile */
+  @media (max-width: 480px) {
+    html { font-size: 14px; }
+    section { padding: 3rem 0; }
+
+    .hero { padding: 2rem 1.2rem; min-height: 80vh; }
+    .hero-title { font-size: clamp(2.2rem, 12vw, 3rem); }
+    .hero-eyebrow { font-size: 0.55rem; }
+    .hero-sub { font-size: 0.8rem; }
+    .string-lights { display: none; }
+    .ring { display: none; }
+
+    .menu-container { padding: 0 1.2rem; }
+    .cat-tab { padding: 0.5rem 0.8rem; font-size: 0.55rem; letter-spacing: 0.15em; }
+    .menu-item { padding: 0.85rem 0; gap: 0.6rem; }
+    .item-name { font-size: 1rem; }
+    .item-note { font-size: 0.7rem; }
+    .item-meta { flex-wrap: wrap; gap: 0.4rem; }
+    .item-price { font-size: 0.9rem; }
+    .item-price small { font-size: 0.5rem; }
+    .item-img-wrap, .item-img-placeholder { width: 70px; min-height: 60px; border-radius: 5px; }
+
+    .about-strip { padding: 3rem 1.2rem; }
+    .about-inner { gap: 1.5rem; }
+    .about-quote { font-size: 1.1rem; padding-left: 1rem; }
+
+    .specials-callout { padding: 2.5rem 1.2rem; }
+
+    footer { padding: 2.5rem 1.2rem 1.5rem; }
+    .footer-inner { gap: 1.5rem; }
+    .footer-brand { font-size: 1.4rem; }
+    .footer-list li { font-size: 0.8rem; }
+  }
+
+  /* Landscape mobile */
+  @media (max-height: 500px) {
+    .hero { min-height: 100vh; padding: 4rem 1.5rem; }
+    .hero-title { font-size: 2.5rem; }
+    .hero-eyebrow { margin-bottom: 0.8rem; }
+    .hero-sub { margin-top: 0.8rem; }
+    .ring { display: none; }
+    .leaf { display: none; }
+    .steam-wrap { height: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">The <span>Backyard</span></a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#specials">Specials</a></li>
+    <li><a href="#find-us">Find Us</a></li>
+  </ul>
+  <a href="https://maps.app.goo.gl/u6wFLSaS5iw9HZvk9" target="_blank" class="nav-cta">Visit Us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+  </div>
+  <div class="steam-wrap" id="steamWrap"></div>
+  <div class="leaf leaf-variegated" style="top:12%;left:6%;transform:rotate(30deg);width:90px;height:42px;"></div>
+  <div class="leaf" style="top:20%;right:10%;transform:rotate(-20deg);width:50px;height:25px;animation-delay:2s;"></div>
+  <div class="leaf leaf-variegated" style="bottom:28%;left:10%;transform:rotate(55deg);width:75px;height:34px;animation-delay:1s;"></div>
+  <div class="leaf" style="bottom:32%;right:8%;transform:rotate(-45deg);width:45px;height:22px;animation-delay:3s;"></div>
+  <div class="leaf" style="top:45%;right:4%;transform:rotate(15deg);width:55px;height:26px;animation-delay:1.5s;"></div>
+  <div class="leaf leaf-variegated" style="top:60%;left:3%;transform:rotate(-30deg);width:60px;height:28px;animation-delay:2.5s;"></div>
+
+  <!-- String lights -->
+  <div class="string-lights">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,60 Q180,20 360,60 Q540,100 720,60 Q900,20 1080,60 Q1260,100 1440,60" stroke="none" fill="none"/>
+      <circle cx="100" cy="50" r="3" fill="var(--gold)" opacity="0.4"/>
+      <circle cx="250" cy="35" r="2.5" fill="var(--gold)" opacity="0.3"/>
+      <circle cx="400" cy="50" r="3" fill="var(--gold)" opacity="0.5"/>
+      <circle cx="550" cy="70" r="2.5" fill="var(--gold)" opacity="0.3"/>
+      <circle cx="700" cy="50" r="3" fill="var(--gold)" opacity="0.4"/>
+      <circle cx="850" cy="35" r="2.5" fill="var(--gold)" opacity="0.3"/>
+      <circle cx="1000" cy="50" r="3" fill="var(--gold)" opacity="0.5"/>
+      <circle cx="1150" cy="70" r="2.5" fill="var(--gold)" opacity="0.3"/>
+      <circle cx="1300" cy="50" r="3" fill="var(--gold)" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <p class="hero-eyebrow">Belgaum's Open-Air Bistro & Grill</p>
+  <h1 class="hero-title">
+    The<br><em>Backyard</em>
+  </h1>
+  <p class="hero-sub">Open air · Craft coffee · Wood-fired grill · Good vibes</p>
+
+  <div class="hero-scroll">
+    <span>Explore Menu</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-container">
+
+    <div class="menu-header reveal">
+      <span class="section-eyebrow">Crafted with care</span>
+      <h2 class="menu-title">Our <em>Coffee</em> Menu</h2>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="cat-tabs reveal">
+      <button class="cat-tab active" data-cat="hot">Hot Coffee</button>
+      <button class="cat-tab" data-cat="cold">Cold Coffee</button>
+      <button class="cat-tab" data-cat="flavoured">Hot Specials</button>
+      <button class="cat-tab" data-cat="cold-specials">Cold Specials</button>
+    </div>
+
+    <!-- HOT COFFEE -->
+    <div class="menu-list active" id="cat-hot">
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">Espresso</div><div class="item-note">Pure &amp; intense single shot</div><div class="item-meta"><span class="item-price">₹79<small>HOT</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-1"><div class="item-body"><div class="item-name">Double Espresso</div><div class="item-note">Two shots, deep roast</div><div class="item-meta"><span class="item-price">₹99<small>HOT</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-2"><div class="item-body"><div class="item-name">Lungo Shot</div><div class="item-note">Long pull, mild &amp; smooth</div><div class="item-meta"><span class="item-price">₹119<small>HOT</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">Americano</div><div class="item-note">Espresso &amp; hot water</div><div class="item-meta"><span class="item-price">₹79<small>HOT</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-1"><div class="item-body"><div class="item-name">Macchiato</div><div class="item-note">Espresso with steamed milk</div><div class="item-meta"><span class="item-price">₹129<small>HOT</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-2"><div class="item-body"><div class="item-name">Flat White</div><div class="item-note">Velvety microfoam</div><div class="item-meta"><span class="item-price">₹149<small>HOT</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">Café Latte</div><div class="item-note">Espresso &amp; steamed milk</div><div class="item-meta"><span class="item-price">₹169<small>HOT</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-1"><div class="item-body"><div class="item-name">Cappuccino</div><div class="item-note">Classic Italian froth</div><div class="item-meta"><span class="item-price">₹169<small>HOT</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-2"><div class="item-body"><div class="item-name">Irish Coffee</div><div class="item-note">Rich &amp; aromatic blend</div><div class="item-meta"><span class="item-price">₹179<small>HOT</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">Café Mocha</div><div class="item-note">Coffee meets chocolate</div><div class="item-meta"><span class="item-price">₹179<small>HOT</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-1"><div class="item-body"><div class="item-name">Vanilla Latte</div><div class="item-note">Smooth Madagascar vanilla</div><div class="item-meta"><span class="item-price">₹179<small>HOT</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-2"><div class="item-body"><div class="item-name">Hazelnut Latte</div><div class="item-note">Nutty &amp; comforting</div><div class="item-meta"><span class="item-price">₹179<small>HOT</small></span></div></div><div class="item-img-placeholder"></div></div>
+    </div>
+
+    <!-- COLD COFFEE -->
+    <div class="menu-list" id="cat-cold">
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">Iced Americano</div><div class="item-note">Espresso over ice</div><div class="item-meta"><span class="item-price">₹99<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-1"><div class="item-body"><div class="item-name">Affogato</div><div class="item-note">Espresso poured over ice cream</div><div class="item-meta"><span class="item-price">₹149<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-2"><div class="item-body"><div class="item-name">Cold Coffee</div><div class="item-note">Chilled &amp; refreshing</div><div class="item-meta"><span class="item-price">₹169<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">Classic Coffee</div><div class="item-note">Timeless backyard blend</div><div class="item-meta"><span class="item-price">₹169<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-1"><div class="item-body"><div class="item-name">Iced Caramel Macchiato</div><div class="item-note">Layered caramel beauty</div><div class="item-meta"><span class="item-price">₹169<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-2"><div class="item-body"><div class="item-name">Iced Mocha</div><div class="item-note">Cold chocolate espresso</div><div class="item-meta"><span class="item-price">₹179<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">Iced Latte</div><div class="item-note">Smooth over ice</div><div class="item-meta"><span class="item-price">₹179<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-1"><div class="item-body"><div class="item-name">Iced Caramel Latte</div><div class="item-note">Sweet golden caramel</div><div class="item-meta"><span class="item-price">₹179<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-2"><div class="item-body"><div class="item-name">Iced Vanilla Latte</div><div class="item-note">Cool vanilla dreams</div><div class="item-meta"><span class="item-price">₹179<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">Iced Hazelnut Latte</div><div class="item-note">Nutty cold indulgence</div><div class="item-meta"><span class="item-price">₹179<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+    </div>
+
+    <!-- HOT FLAVOURED SPECIALS -->
+    <div class="menu-list" id="cat-flavoured">
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">Snowy Mocha</div><div class="item-note">White chocolate &amp; espresso</div><div class="item-meta"><span class="item-price">₹179<small>SIGNATURE</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-1"><div class="item-body"><div class="item-name">Spanish Latte</div><div class="item-note">Condensed milk richness</div><div class="item-meta"><span class="item-price">₹179<small>SIGNATURE</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-2"><div class="item-body"><div class="item-name">Vietnamese Coffee</div><div class="item-note">Drip brew tradition</div><div class="item-meta"><span class="item-price">₹179<small>SIGNATURE</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">Lotus Biscoff Latte<span class="item-badge">Fan Fav</span></div><div class="item-note">Caramelised biscuit magic</div><div class="item-meta"><span class="item-price">₹179<small>SIGNATURE</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-1"><div class="item-body"><div class="item-name">Tiramisu Latte<span class="item-badge">Fan Fav</span></div><div class="item-note">Italian dessert in a cup</div><div class="item-meta"><span class="item-price">₹179<small>SIGNATURE</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-2"><div class="item-body"><div class="item-name">French Vanilla Latte</div><div class="item-note">Custard-sweet vanilla cream</div><div class="item-meta"><span class="item-price">₹179<small>SIGNATURE</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">English Toffee Latte</div><div class="item-note">Buttery toffee warmth</div><div class="item-meta"><span class="item-price">₹179<small>SIGNATURE</small></span></div></div><div class="item-img-placeholder"></div></div>
+    </div>
+
+    <!-- COLD SPECIALS -->
+    <div class="menu-list" id="cat-cold-specials">
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">Cranberry Espresso</div><div class="item-note">Tart meets bold espresso</div><div class="item-meta"><span class="item-price">₹169<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-1"><div class="item-body"><div class="item-name">French Vanilla Cold Coffee</div><div class="item-note">Chilled custard indulgence</div><div class="item-meta"><span class="item-price">₹179<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-2"><div class="item-body"><div class="item-name">Iced Snowy Mocha</div><div class="item-note">White choco over ice</div><div class="item-meta"><span class="item-price">₹179<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal"><div class="item-body"><div class="item-name">English Toffee Cold Coffee</div><div class="item-note">Cool toffee delight</div><div class="item-meta"><span class="item-price">₹179<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-1"><div class="item-body"><div class="item-name">Iced Vietnamese Coffee</div><div class="item-note">Drip-style over crushed ice</div><div class="item-meta"><span class="item-price">₹179<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal reveal-delay-2"><div class="item-body"><div class="item-name">Irish Coffee<span class="item-badge">House Special</span></div><div class="item-note">Cold brew indulgence</div><div class="item-meta"><span class="item-price">₹249<small>COLD</small></span></div></div><div class="item-img-placeholder"></div></div>
+      <div class="menu-item reveal">
+        <div class="item-body"><div class="item-name">Twisted Brownie Frappe<span class="item-badge">Must Try</span></div><div class="item-note">Brownie blended &amp; dreamy</div><div class="item-meta"><span class="item-price">₹249<small>COLD</small></span></div></div>
+        <div class="item-img-wrap" onclick="openLightbox('tpb.jpg')"><img src="tpb.jpg" alt="Twisted Brownie Frappe" loading="lazy"></div>
+      </div>
+    </div>
+
+  </div><!-- /menu-container -->
+</section>
+
+
+
+<div class="texture-strip"></div>
+
+<!-- ABOUT -->
+<section class="about-strip" id="find-us">
+  <div class="about-inner">
+    <div>
+      <blockquote class="about-quote reveal">
+        "A lush open-air escape where nature meets the grill, and every meal feels like a getaway."
+      </blockquote>
+    </div>
+    <div class="about-text reveal reveal-delay-1">
+      <p>Tucked away in Belgaum's heartbeat, The Backyard is where lush greenery meets bold flavours. Whether you're here for a morning brew, a wood-fired grill feast, or an evening under the stars with friends — this is your place to breathe.</p>
+      <p>We serve every plate with passion, pour every drink with purpose, and keep every corner wrapped in nature so you never want to leave.</p>
+      <div class="about-links">
+        <a href="https://maps.app.goo.gl/u6wFLSaS5iw9HZvk9" target="_blank" class="about-link">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Find on Maps
+        </a>
+        <a href="https://www.instagram.com/thebackyard_belgaum/" target="_blank" class="about-link">
+          <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+          Follow on Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALS CALLOUT -->
+<section class="specials-callout" id="specials">
+  <span class="specials-label reveal">From our kitchen to your table</span>
+  <h2 class="specials-title reveal reveal-delay-1">Beyond the <em>ordinary.</em><br>Crafted for the bold.</h2>
+  <div class="ornament reveal reveal-delay-2"><div class="ornament-dot"></div><div class="ornament-dot"></div><div class="ornament-dot"></div></div>
+  <p style="max-width:500px;margin:1.5rem auto 0;font-size:0.9rem;color:rgba(245,239,224,0.4);line-height:1.9;font-weight:300;" class="reveal reveal-delay-3">
+    From the Twisted Brownie Frappe to the Lotus Biscoff Latte to our wood-fired grill specials — every creation tells the story of our backyard.
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">The <em>Backyard</em></div>
+      <p class="footer-tagline">Where nature meets the table —<br>coffee, grill &amp; good company under the open sky.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Explore</div>
+      <ul class="footer-list">
+        <li><a href="#menu">Coffee Menu</a></li>
+        <li><a href="#specials">House Specials</a></li>
+        <li><a href="#find-us">Find Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Connect</div>
+      <ul class="footer-list">
+        <li><a href="https://www.instagram.com/thebackyard_belgaum/" target="_blank">Instagram</a></li>
+        <li><a href="https://maps.app.goo.gl/u6wFLSaS5iw9HZvk9" target="_blank">Google Maps</a></li>
+        <li>Belgaum, Karnataka</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 The Backyard Bistro & Grill, Belgaum</span>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/thebackyard_belgaum/" target="_blank">Instagram</a>
+      <a href="https://maps.app.goo.gl/u6wFLSaS5iw9HZvk9" target="_blank">Maps</a>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+
+  // Generate steam lines
+  const steamWrap = document.getElementById('steamWrap');
+  for(let i = 0; i < 12; i++) {
+    const s = document.createElement('div');
+    s.className = 'steam-line';
+    s.style.left = (20 + Math.random() * 60) + '%';
+    s.style.animationDelay = (Math.random() * 6) + 's';
+    s.style.animationDuration = (4 + Math.random() * 4) + 's';
+    steamWrap.appendChild(s);
+  }
+
+  // Tab switching
+  const tabs = document.querySelectorAll('.cat-tab');
+  const lists = document.querySelectorAll('.menu-list');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      lists.forEach(g => g.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.getElementById('cat-' + tab.dataset.cat);
+      if(target) target.classList.add('active');
+    });
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => obs.observe(el));
+
+  // Lightbox
+  function openLightbox(src) {
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(e) {
+    if(e && e.target !== e.currentTarget) return;
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape') closeLightbox();
+  });
+</script>
+</body>
+</html>
