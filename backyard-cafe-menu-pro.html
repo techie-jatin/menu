@@ -165,10 +165,13 @@ nav.scrolled{
   text-align:center;
   padding:8rem 2rem 4rem;
   overflow:hidden;
-  background:
-    radial-gradient(ellipse at 20% 30%,rgba(13,107,58,0.04) 0%,transparent 50%),
-    radial-gradient(ellipse at 80% 70%,rgba(13,107,58,0.03) 0%,transparent 50%),
-    var(--bg);
+   background:
+     linear-gradient(180deg,var(--bg) 0%,transparent 18%,transparent 82%,var(--bg) 100%),
+     radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.45) 60%,rgba(0,0,0,0.2) 100%),
+     radial-gradient(ellipse at 20% 30%,rgba(0,0,0,0.5) 0%,transparent 60%),
+     radial-gradient(ellipse at 80% 70%,rgba(0,0,0,0.4) 0%,transparent 60%),
+     url("the backyard 01 bg.jpg") center/cover;
+  background-color:var(--bg);
 }
 .hero::after{
   content:'';position:absolute;inset:0;
@@ -478,6 +481,7 @@ nav.scrolled{
   letter-spacing:0.05em;
   color:var(--text-dim);cursor:pointer;
   transition:all 0.3s;
+  border-radius:50px;
 }
 .cat-tab:hover{color:var(--text);border-color:var(--border-light);}
 .cat-tab.active{
@@ -492,11 +496,11 @@ nav.scrolled{
 .menu-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:0.8rem;
+  gap:1rem;
 }
 .menu-item{
-  display:flex;gap:1rem;
-  padding:1rem 1.2rem;
+  display:flex;gap:1.2rem;
+  padding:1.2rem 1.4rem;
   background:var(--card);
   border:1px solid var(--border);
   transition:all 0.3s;
@@ -521,7 +525,7 @@ nav.scrolled{
   border:1px solid var(--gold-dim);
 }
 .menu-item-img{
-  width:72px;height:72px;
+  width:88px;height:88px;
   flex-shrink:0;overflow:hidden;
   border:1px solid var(--border);
   background:var(--surface);
@@ -540,11 +544,11 @@ nav.scrolled{
 }
 .menu-item-body{flex:1;min-width:0;}
 .menu-item-body .mi-name{
-  font-size:0.85rem;font-weight:600;color:var(--text);
+  font-size:0.95rem;font-weight:600;color:var(--text);
 }
 .menu-item-body .mi-note{
-  font-size:0.65rem;color:var(--text-dim);
-  margin-top:0.1rem;font-weight:300;
+  font-size:0.72rem;color:var(--text-dim);
+  margin-top:0.15rem;font-weight:300;
 }
 .menu-item-body .mi-meta{
   display:flex;align-items:center;gap:0.6rem;
@@ -559,6 +563,8 @@ nav.scrolled{
   color:var(--gold);border:1px solid var(--gold-dim);
   padding:0.1rem 0.4rem;
 }
+.mi-badge.chef{color:var(--green-light);border-color:rgba(13,107,58,0.3);background:rgba(13,107,58,0.06);}
+.mi-badge.limited{color:#c41e1e;border-color:rgba(196,30,30,0.3);background:rgba(196,30,30,0.06);}
 
 
 /* ========== SPECIALS ========== */
@@ -831,12 +837,15 @@ footer{
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
 }
-.lightbox.active{display:flex;}
+.lightbox.active{display:flex;animation:lightboxFade 0.3s ease;}
 .lightbox img{
   max-width:90vw;max-height:85vh;
   object-fit:contain;
   border:1px solid var(--border-light);
+  animation:lightboxZoom 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
 }
+@keyframes lightboxFade{from{opacity:0;}to{opacity:1;}}
+@keyframes lightboxZoom{from{opacity:0;transform:scale(0.85);}to{opacity:1;transform:scale(1);}}
 .lightbox-img-wrap{
   position:relative;display:flex;flex-direction:column;
   align-items:center;gap:0.6rem;
@@ -888,6 +897,7 @@ footer{
 }
 
 @media(max-width:480px){
+  .hero{background:linear-gradient(180deg,#000 0%,rgba(0,0,0,0.7) 25%,rgba(0,0,0,0.85) 45%,rgba(0,0,0,0.85) 55%,rgba(0,0,0,0.7) 75%,#000 100%),url("the backyard 3.jpg") center/cover;background-color:#000;}.hero::after{background:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,255,255,0.005) 60px,rgba(255,255,255,0.005) 61px);}
   nav{padding:0 1rem;height:54px;}
   nav.scrolled{height:50px;}
   .nav-logo{font-size:1.1rem;}
@@ -906,10 +916,10 @@ footer{
   .menu-header{flex-direction:column;align-items:flex-start;gap:0.3rem;}
   .cat-tabs{gap:0.3rem;}
   .cat-tab{font-size:0.55rem;padding:0.45rem 0.9rem;}
-  .menu-item-img,.menu-item-placeholder{width:56px;height:56px;}
+  .menu-item-img,.menu-item-placeholder{width:68px;height:68px;}
   .menu-item-placeholder{font-size:1rem;}
-  .menu-item-body .mi-name{font-size:0.8rem;}
-  .menu-item-body .mi-note{font-size:0.6rem;}
+  .menu-item-body .mi-name{font-size:0.85rem;}
+  .menu-item-body .mi-note{font-size:0.65rem;}
   .specials{padding:2.5rem 1rem;}
   .specials-title{font-size:clamp(1.3rem,8vw,1.8rem);}
   .specials-desc{font-size:0.7rem;}
@@ -990,7 +1000,7 @@ footer{
 <!-- STATS -->
 <section class="stats reveal">
   <div class="stats-inner">
-    <div class="stat"><div class="stat-num"><span class="stat-count" data-target="50">0</span><span class="stat-plus">+</span></div><div class="stat-label">Coffee Varieties</div></div>
+    <div class="stat"><div class="stat-num"><span class="stat-count" data-target="282">0</span><span class="stat-plus">+</span></div><div class="stat-label">Menu Items</div></div>
     <div class="stat"><div class="stat-num"><span class="stat-count" data-target="1000">0</span><span class="stat-plus">+</span></div><div class="stat-label">Happy Customers</div></div>
     <div class="stat"><div class="stat-num"><span class="stat-count" data-target="4.9">0</span></div><div class="stat-label">★ Rating</div></div>
   </div>
@@ -1009,15 +1019,15 @@ footer{
     <div class="featured-track" id="featTrack">
       <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">Most Popular</span><img src="tpb.jpg" alt="" loading="lazy"></div><div class="featured-card-body"><div class="fc-name">Twisted Brownie Frappe</div><div class="fc-note">Brownie meets frappé dream</div><div class="fc-bottom"><span class="fc-price">₹229</span></div></div></div>
       <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">Best Seller</span><img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&q=80" alt="" loading="lazy"></div><div class="featured-card-body"><div class="fc-name">Lotus Biscoff Latte</div><div class="fc-note">Caramelised biscuit heaven</div><div class="fc-bottom"><span class="fc-price">₹199</span></div></div></div>
-      <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">Trending</span><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--surface);font-size:2.5rem;color:var(--text-dim);">🥤</div></div><div class="featured-card-body"><div class="fc-name">Lotus Biscoff Frappe</div><div class="fc-note">Biscoff blended to perfection</div><div class="fc-bottom"><span class="fc-price">₹229</span></div></div></div>
-      <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">New</span><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--surface);font-size:2.5rem;color:var(--text-dim);">☕</div></div><div class="featured-card-body"><div class="fc-name">Tiramisu Latte</div><div class="fc-note">Coffee & cream dessert</div><div class="fc-bottom"><span class="fc-price">₹199</span></div></div></div>
-      <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">House Special</span><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--surface);font-size:2.5rem;color:var(--text-dim);">🥛</div></div><div class="featured-card-body"><div class="fc-name">Oreo Shake</div><div class="fc-note">Cookie cream perfection</div><div class="fc-bottom"><span class="fc-price">₹219</span></div></div></div>
+      <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">Trending</span><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80" alt="" loading="lazy"></div><div class="featured-card-body"><div class="fc-name">Lotus Biscoff Frappe</div><div class="fc-note">Biscoff blended to perfection</div><div class="fc-bottom"><span class="fc-price">₹229</span></div></div></div>
+      <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">New</span><img src="https://baranbakery.com/wp-content/uploads/2022/10/Tiramisu-Latte-8.jpg" alt="" loading="lazy"></div><div class="featured-card-body"><div class="fc-name">Tiramisu Latte</div><div class="fc-note">Coffee & cream dessert</div><div class="fc-bottom"><span class="fc-price">₹199</span></div></div></div>
+      <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">House Special</span><img src="https://www.whiskaffair.com/wp-content/uploads/2020/07/Oreo-Milkshake-2-1.jpg" alt="" loading="lazy"></div><div class="featured-card-body"><div class="fc-name">Oreo Shake</div><div class="fc-note">Cookie cream perfection</div><div class="fc-bottom"><span class="fc-price">₹219</span></div></div></div>
       <!-- clones for infinite scroll visual -->
       <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">Most Popular</span><img src="tpb.jpg" alt="" loading="lazy"></div><div class="featured-card-body"><div class="fc-name">Twisted Brownie Frappe</div><div class="fc-note">Brownie meets frappé dream</div><div class="fc-bottom"><span class="fc-price">₹229</span></div></div></div>
       <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">Best Seller</span><img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&q=80" alt="" loading="lazy"></div><div class="featured-card-body"><div class="fc-name">Lotus Biscoff Latte</div><div class="fc-note">Caramelised biscuit heaven</div><div class="fc-bottom"><span class="fc-price">₹199</span></div></div></div>
-      <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">Trending</span><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--surface);font-size:2.5rem;color:var(--text-dim);">🥤</div></div><div class="featured-card-body"><div class="fc-name">Lotus Biscoff Frappe</div><div class="fc-note">Biscoff blended to perfection</div><div class="fc-bottom"><span class="fc-price">₹229</span></div></div></div>
-      <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">New</span><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--surface);font-size:2.5rem;color:var(--text-dim);">☕</div></div><div class="featured-card-body"><div class="fc-name">Tiramisu Latte</div><div class="fc-note">Coffee & cream dessert</div><div class="fc-bottom"><span class="fc-price">₹199</span></div></div></div>
-      <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">House Special</span><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--surface);font-size:2.5rem;color:var(--text-dim);">🥛</div></div><div class="featured-card-body"><div class="fc-name">Oreo Shake</div><div class="fc-note">Cookie cream perfection</div><div class="fc-bottom"><span class="fc-price">₹219</span></div></div></div>
+      <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">Trending</span><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80" alt="" loading="lazy"></div><div class="featured-card-body"><div class="fc-name">Lotus Biscoff Frappe</div><div class="fc-note">Biscoff blended to perfection</div><div class="fc-bottom"><span class="fc-price">₹229</span></div></div></div>
+      <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">New</span><img src="https://baranbakery.com/wp-content/uploads/2022/10/Tiramisu-Latte-8.jpg" alt="" loading="lazy"></div><div class="featured-card-body"><div class="fc-name">Tiramisu Latte</div><div class="fc-note">Coffee & cream dessert</div><div class="fc-bottom"><span class="fc-price">₹199</span></div></div></div>
+      <div class="featured-card"><div class="featured-card-img"><span class="featured-card-badge">House Special</span><img src="https://www.whiskaffair.com/wp-content/uploads/2020/07/Oreo-Milkshake-2-1.jpg" alt="" loading="lazy"></div><div class="featured-card-body"><div class="fc-name">Oreo Shake</div><div class="fc-note">Cookie cream perfection</div><div class="fc-bottom"><span class="fc-price">₹219</span></div></div></div>
     </div>
   </div>
 </section>
@@ -1034,9 +1044,9 @@ footer{
     <p style="font-size:0.65rem;color:var(--text-dim);margin:-1.5rem 0 1.5rem;font-weight:300;border-left:2px solid var(--green);padding-left:0.8rem;">To ensure you absolutely enjoy your dish, we'll need 15 minutes to prepare an absolute delight.</p>
 
     <div class="cat-tabs reveal reveal-d1">
-      <button class="cat-tab active" data-cat="sides">Sides</button>
-      <button class="cat-tab" data-cat="starters">Starters</button>
+      <button class="cat-tab active" data-cat="starters">Starters</button>
       <button class="cat-tab" data-cat="salads">Salads</button>
+      <button class="cat-tab" data-cat="sides">Sides</button>
       <button class="cat-tab" data-cat="sandwiches">Sandwiches</button>
       <button class="cat-tab" data-cat="panini">Panini</button>
       <button class="cat-tab" data-cat="burgers">Burgers</button>
@@ -1049,173 +1059,158 @@ footer{
       <button class="cat-tab" data-cat="beverages">Beverages</button>
     </div>
 
-    <div class="menu-list active" id="list-sides">
+    <div class="menu-list" id="list-sides">
       <div class="menu-grid">
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍟</div><div class="menu-item-body"><div class="mi-name">French Fries (Plain)</div><div class="mi-note">Simply deep fried potato fries, tossed with salt & served with tomato sauce</div><div class="mi-meta"><span class="mi-price">₹119</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🌶️</div><div class="menu-item-body"><div class="mi-name">Peri Peri Fries</div><div class="mi-note">Deep fried potato fries tossed with peri peri & combine herbs, served with tomato sauce</div><div class="mi-meta"><span class="mi-price">₹139</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🧀</div><div class="menu-item-body"><div class="mi-name">Cheesy Nachos With Baked Beans</div><div class="mi-note">Baked nachos served with baked beans tossed in arrabiata sauce topped with homemade cheese sauce</div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍞</div><div class="menu-item-body"><div class="mi-name">Garlic Bread (Cheese Or Without Cheese)</div><div class="mi-note">Homemade fresh garlic bread with combine herbs topped with mozzarella cheese</div><div class="mi-meta"><span class="mi-price">₹99</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍄</div><div class="menu-item-body"><div class="mi-name">Garlic Butter Mushrooms</div><div class="mi-note">Farm fresh mushrooms sauted with finely chopped garlic and salted butter</div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🥖</div><div class="menu-item-body"><div class="mi-name">Classic Bruschetta</div><div class="mi-note">Homemade garlic bread topped with garlic tomato & bell pepper, mozzarella cheese, processed cheese & European herbs</div><div class="mi-meta"><span class="mi-price">₹159</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍄</div><div class="menu-item-body"><div class="mi-name">Garlic Butter Mushrooms</div><div class="mi-note">Farm fresh mushrooms sauted with finely chopped garlic and salted butter</div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🧀</div><div class="menu-item-body"><div class="mi-name">Cheesy Nachos With Baked Beans</div><div class="mi-note">Baked nachos served with baked beans tossed in arrabiata sauce topped with homemade cheese sauce</div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🌶️</div><div class="menu-item-body"><div class="mi-name">Peri Peri Fries</div><div class="mi-note">Deep fried potato fries tossed with peri peri & combine herbs, served with tomato sauce</div><div class="mi-meta"><span class="mi-price">₹139</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍞</div><div class="menu-item-body"><div class="mi-name">Garlic Bread (Cheese Or Without Cheese)</div><div class="mi-note">Homemade fresh garlic bread with combine herbs topped with mozzarella cheese</div><div class="mi-meta"><span class="mi-price">₹99</span></div></div></div>
       </div>
     </div>
 
-    <div class="menu-list" id="list-starters">
+    <div class="menu-list active" id="list-starters">
       <div class="menu-grid">
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🧀</div><div class="menu-item-body"><div class="mi-name">Corn & Cheese Croquettes</div><div class="mi-note">Deep fried ball or roll shaped dumpling with corn, mozzarella cheese, processed cheese and potato, coated with bread crumbs served with backyard's spicy aioli</div><div class="mi-meta"><span class="mi-price">₹199</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🫑</div><div class="menu-item-body"><div class="mi-name">Chimichurri Paneer</div><div class="mi-note">Grilled paneer with combine herbs topped with homemade chimichurri sauce</div><div class="mi-meta"><span class="mi-price">₹199</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🌽</div><div class="menu-item-body"><div class="mi-name">Spicy Baby Corn Tempura</div><div class="mi-note">Deep fried babycorn ribs coated in tempura batter tossed in backyard's homemade spicy sauce</div><div class="mi-meta"><span class="mi-price">₹199</span></div></div></div>
-        <div class="menu-item reveal popular"><div class="menu-item-placeholder">🍗</div><div class="menu-item-body"><div class="mi-name">Crispy Peri Peri Chicken</div><div class="mi-note">Deep fried chicken breast pieces coated in bread crumbs topped with peri peri served with chili mayo aioli</div><div class="mi-meta"><span class="mi-price">₹239</span><span class="mi-badge">Popular</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🐔</div><div class="menu-item-body"><div class="mi-name">Chimichurri Chicken</div><div class="mi-note">Grilled chicken breast pieces with combine herbs topped with homemade chimichurri sauce</div><div class="mi-meta"><span class="mi-price">₹239</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🌶️</div><div class="menu-item-body"><div class="mi-name">Spicy Chicken Tempura</div><div class="mi-note">Deep fried chicken strips coated with tempura batter tossed in backyard's homemade spicy sauce</div><div class="mi-meta"><span class="mi-price">₹239</span></div></div></div>
+        <div class="menu-item reveal popular"><div class="menu-item-placeholder">🍗</div><div class="menu-item-body"><div class="mi-name">Crispy Peri Peri Chicken</div><div class="mi-note">Deep fried chicken breast pieces coated in bread crumbs topped with peri peri served with chili mayo aioli</div><div class="mi-meta"><span class="mi-price">₹239</span><span class="mi-badge">Popular</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🫑</div><div class="menu-item-body"><div class="mi-name">Chimichurri Paneer</div><div class="mi-note">Grilled paneer with combine herbs topped with homemade chimichurri sauce</div><div class="mi-meta"><span class="mi-price">₹199</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🌽</div><div class="menu-item-body"><div class="mi-name">Spicy Baby Corn Tempura</div><div class="mi-note">Deep fried babycorn ribs coated in tempura batter tossed in backyard's homemade spicy sauce</div><div class="mi-meta"><span class="mi-price">₹199</span></div></div></div>
       </div>
     </div>
 
     <div class="menu-list" id="list-salads">
       <div class="menu-grid">
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥗</div><div class="menu-item-body"><div class="mi-name">Fruit & Fibre Salad</div><div class="mi-note">Apple & pears slices, ice berg topped with walnut, mix seeds & lemon chilli vinaigrette</div><div class="mi-meta"><span class="mi-price">₹219</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥬</div><div class="menu-item-body"><div class="mi-name">Caesar Salad</div><div class="mi-note">Ice berg, romaine lettuce & croutons dressed with lemon juice, extra virgin olive oil, Parmesan cheese and black pepper</div><div class="mi-meta"><span class="mi-price">₹219 / ₹259</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥗</div><div class="menu-item-body"><div class="mi-name">Russian Salad</div><div class="mi-note">Peas, corn, carrot, pineapple, orange, apple, pears & eggless mayonnaise</div><div class="mi-meta"><span class="mi-price">₹219</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥒</div><div class="menu-item-body"><div class="mi-name">Greek Salad</div><div class="mi-note">Sliced cucumber, capsicum, cherry tomatoes, onion, ice berg mixed with black olives, feta cheese dressed in dijon mustard, honey & extra virgin olive oil</div><div class="mi-meta"><span class="mi-price">₹229</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍝</div><div class="menu-item-body"><div class="mi-name">Pasta Salad</div><div class="mi-note">Pasta fredda mixed with basil pesto sauce & cherry tomatoes</div><div class="mi-meta"><span class="mi-price">₹219 / ₹259</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥜</div><div class="menu-item-body"><div class="mi-name">Waldorf Salad</div><div class="mi-note">Fruit n nut salad with diced red skinned apples, pears, oranges, ice berg mixed in mayonnaise n cream</div><div class="mi-meta"><span class="mi-price">₹219</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🌾</div><div class="menu-item-body"><div class="mi-name">Quinoa Salad</div><div class="mi-note">Refreshing superfood salad with quinoa, cucumber, cherry tomatoes, onion, olives & sprouts dressed with extra virgin olive oil</div><div class="mi-meta"><span class="mi-price">₹229</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥒</div><div class="menu-item-body"><div class="mi-name">Greek Salad</div><div class="mi-note">Sliced cucumber, capsicum, cherry tomatoes, onion, ice berg mixed with black olives, feta cheese dressed in dijon mustard, honey & extra virgin olive oil</div><div class="mi-meta"><span class="mi-price">₹229</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥜</div><div class="menu-item-body"><div class="mi-name">Waldorf Salad</div><div class="mi-note">Fruit n nut salad with diced red skinned apples, pears, oranges, ice berg mixed in mayonnaise n cream</div><div class="mi-meta"><span class="mi-price">₹219</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🍉</div><div class="menu-item-body"><div class="mi-name">Watermelon & Feta Salad</div><div class="mi-note">Summer salad of watermelon, mint, basil, feta cheese & simple vinaigrette dressing</div><div class="mi-meta"><span class="mi-price">₹219</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥗</div><div class="menu-item-body"><div class="mi-name">Russian Salad</div><div class="mi-note">Peas, corn, carrot, pineapple, orange, apple, pears & eggless mayonnaise</div><div class="mi-meta"><span class="mi-price">₹219</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍝</div><div class="menu-item-body"><div class="mi-name">Pasta Salad</div><div class="mi-note">Pasta fredda mixed with basil pesto sauce & cherry tomatoes</div><div class="mi-meta"><span class="mi-price">₹219 / 259</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥬</div><div class="menu-item-body"><div class="mi-name">Caesar Salad</div><div class="mi-note">Ice berg, romaine lettuce & croutons dressed with lemon juice, extra virgin olive oil, Parmesan cheese and black pepper</div><div class="mi-meta"><span class="mi-price">₹219 / 259</span></div></div></div>
       </div>
     </div>
 
     <div class="menu-list" id="list-sandwiches">
       <div class="menu-grid">
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥪</div><div class="menu-item-body"><div class="mi-name">Spicy Paneer</div><div class="mi-note">Sliced paneer tossed with homemade spicy sauce layered between grilled homemade brown bread served with French fries & tomato sauce</div><div class="mi-meta"><span class="mi-price">₹159</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥪</div><div class="menu-item-body"><div class="mi-name">Signature Kahuna Chicken</div><div class="mi-note">Backyard's signature sandwich with veggies, sliced chicken, secretly marinated beetroot, cottage cheese & hawaiian pineapple with homemade brown bread served with fries</div><div class="mi-meta"><span class="mi-price">₹249</span></div></div></div>
         <div class="menu-item reveal popular"><div class="menu-item-placeholder">🥪</div><div class="menu-item-body"><div class="mi-name">Kahuna — The Signature</div><div class="mi-note">Backyard's signature sandwich with loads of veggies, secretly marinated beetroot cottage cheese & hawaiian pineapple with homemade grilled brown bread served with fries</div><div class="mi-meta"><span class="mi-price">₹219</span><span class="mi-badge">Popular</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🥪</div><div class="menu-item-body"><div class="mi-name">Cheesy Chicken Keema</div><div class="mi-note">Minced chicken tossed in Indian herbs & spices with processed cheese layered between homemade grilled brown bread, served with fries</div><div class="mi-meta"><span class="mi-price">₹189</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥪</div><div class="menu-item-body"><div class="mi-name">Signature Kahuna Chicken</div><div class="mi-note">Backyard's signature sandwich with veggies, sliced chicken, secretly marinated beetroot, cottage cheese & hawaiian pineapple with homemade brown bread served with fries</div><div class="mi-meta"><span class="mi-price">₹249</span></div></div></div>
       </div>
     </div>
 
     <div class="menu-list" id="list-panini">
       <div class="menu-grid">
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥪</div><div class="menu-item-body"><div class="mi-name">Classic Veg Panini</div><div class="mi-note">Homemade Italian whole wheat bread grilled & stuffed with exotic vegetables mixed with backyard's spicy sauce served with French fries & tomato sauce</div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🧀</div><div class="menu-item-body"><div class="mi-name">Creamy Cheese Panini</div><div class="mi-note">Homemade Italian whole wheat bread grilled & stuffed with spinach & corn mixed with backyard's cream cheese sauce & extra cheese served with fries</div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥪</div><div class="menu-item-body"><div class="mi-name">Classic Chicken Panini</div><div class="mi-note">Homemade Italian whole wheat bread grilled & stuffed with minced chicken mixed with backyard's spicy sauce & cheese served with fries</div><div class="mi-meta"><span class="mi-price">₹179</span></div></div></div>
         <div class="menu-item reveal popular"><div class="menu-item-placeholder">🥪</div><div class="menu-item-body"><div class="mi-name">Pulled Lamb Panini</div><div class="mi-note">Homemade Italian whole wheat bread grilled & stuffed with shredded lamb mixed with homemade combine herbs & cheese, served with fries</div><div class="mi-meta"><span class="mi-price">₹329</span><span class="mi-badge">Popular</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥪</div><div class="menu-item-body"><div class="mi-name">Classic Chicken Panini</div><div class="mi-note">Homemade Italian whole wheat bread grilled & stuffed with minced chicken mixed with backyard's spicy sauce & cheese served with fries</div><div class="mi-meta"><span class="mi-price">₹179</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🧀</div><div class="menu-item-body"><div class="mi-name">Creamy Cheese Panini</div><div class="mi-note">Homemade Italian whole wheat bread grilled & stuffed with spinach & corn mixed with backyard's cream cheese sauce & extra cheese served with fries</div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
       </div>
     </div>
 
     <!-- BURGERS -->
     <div class="menu-list" id="list-burgers">
       <div class="menu-grid">
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Veg Supreme Burger</div><div class="mi-note">Tomato cucumber ice berg homemade mix veggies patty, cheddar cheese, backyard's mayo mix. Served on freshly baked homemade buns</div><div class="mi-meta"><span class="mi-price">₹159</span></div></div></div>
+        <div class="menu-item reveal popular"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Kahuna The Signature (Lamb)</div><div class="mi-note">Homemade minced lamb patties + marinated hawaiian pineapple, caramelised onion, spicy mayo</div><div class="mi-meta"><span class="mi-price">₹369</span><span class="mi-badge">Signature</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Shredded Lamb Burger</div><div class="mi-note">Pulled lamb shreds in chef's special sauce, caramelised onion, garlic mayo</div><div class="mi-meta"><span class="mi-price">₹325</span></div></div></div>
+        <div class="menu-item reveal popular"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Double Cheese & Chicken Burger</div><div class="mi-note">Double cheese & chicken burger — grated cheddar + sliced cheese, homemade minced chicken patty, cucumber, jalapeño, coleslaw</div><div class="mi-meta"><span class="mi-price">₹229</span><span class="mi-badge">Popular</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Grilled Chicken Burger</div><div class="mi-note">A thick slice of grilled chicken breast, dijon mustard, tomato, cucumber, red cabbage coleslaw, cheese</div><div class="mi-meta"><span class="mi-price">₹219</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Crispy Chicken Burger</div><div class="mi-note">Deep fried sliced breaded chicken breast pieces, coleslaw, cucumber, tomato, mayo</div><div class="mi-meta"><span class="mi-price">₹199</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Paneer Tikka Burger</div><div class="mi-note">Sliced paneer tossed in homemade tandoori masala, ice berg, mint mayo, lacha pyaaz + coleslaw</div><div class="mi-meta"><span class="mi-price">₹179</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Paneer Ginger Burger</div><div class="mi-note">Homemade breaded paneer ginger patty with ice berg + tomato + cucumber coleslaw cheddar cheese n mayo</div><div class="mi-meta"><span class="mi-price">₹179</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Grilled Chicken Burger</div><div class="mi-note">A thick slice of grilled chicken breast, dijon mustard, tomato, cucumber, red cabbage coleslaw, cheese</div><div class="mi-meta"><span class="mi-price">₹219</span></div></div></div>
-        <div class="menu-item reveal popular"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Double Cheese & Chicken Burger</div><div class="mi-note">Double cheese & chicken burger — grated cheddar + sliced cheese, homemade minced chicken patty, cucumber, jalapeño, coleslaw</div><div class="mi-meta"><span class="mi-price">₹229</span><span class="mi-badge">Popular</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Crispy Chicken Burger</div><div class="mi-note">Deep fried sliced breaded chicken breast pieces, coleslaw, cucumber, tomato, mayo</div><div class="mi-meta"><span class="mi-price">₹199</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Shredded Lamb Burger</div><div class="mi-note">Pulled lamb shreds in chef's special sauce, caramelised onion, garlic mayo</div><div class="mi-meta"><span class="mi-price">₹325</span></div></div></div>
-        <div class="menu-item reveal popular"><div class="menu-item-placeholder">🍔</div><div class="menu-item-body"><div class="mi-name">Kahuna The Signature (Lamb)</div><div class="mi-note">Homemade minced lamb patties + marinated hawaiian pineapple, caramelised onion, spicy mayo</div><div class="mi-meta"><span class="mi-price">₹369</span><span class="mi-badge">Signature</span></div></div></div>
       </div>
     </div>
 
     <!-- WINGS -->
     <div class="menu-list" id="list-wings">
       <div class="menu-grid">
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍗</div><div class="menu-item-body"><div class="mi-name">Chicken Wings With Angry Sauce</div><div class="mi-note">Traditionally baked juicy unbreaded chicken wings with combine herbs tossed in angry sauce topped with sesame oil & sesame seeds</div><div class="mi-meta"><span class="mi-price">₹299</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍗</div><div class="menu-item-body"><div class="mi-name">Buffalo Chicken Wings</div><div class="mi-note">Traditionally baked juicy unbreaded chicken wings with American herbs tossed in spicy American sauce</div><div class="mi-meta"><span class="mi-price">₹299</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🍗</div><div class="menu-item-body"><div class="mi-name">Chicken Wings With Chef's Special Sauce</div><div class="mi-note">Baked juicy unbreaded chicken wings with European herbs tossed in chef's special sauce</div><div class="mi-meta"><span class="mi-price">₹299</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍗</div><div class="menu-item-body"><div class="mi-name">Buffalo Chicken Wings</div><div class="mi-note">Traditionally baked juicy unbreaded chicken wings with American herbs tossed in spicy American sauce</div><div class="mi-meta"><span class="mi-price">₹299</span></div></div></div>
       </div>
     </div>
 
     <!-- PASTA -->
     <div class="menu-list" id="list-pasta">
       <div class="menu-grid">
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🧀</div><div class="menu-item-body"><div class="mi-name">Mac & Cheese</div><div class="mi-note">Macaroni & cheddar cheese baked in a casserole, crunchy on top, creamy and cheesy inside</div><div class="mi-meta"><span class="mi-price">₹279</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍝</div><div class="menu-item-body"><div class="mi-name">Alfredo</div><div class="mi-note">Exotic veggies or chicken & penne cooked in a delicious homemade Alfredo sauce topped with black olives & Parmesan</div><div class="mi-meta"><span class="mi-price">₹279 / ₹289</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍝</div><div class="menu-item-body"><div class="mi-name">Arrabiata</div><div class="mi-note">Exotic veggies or chicken & penne cooked with rich & spicy Italian sauce</div><div class="mi-meta"><span class="mi-price">₹279 / ₹289</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🌿</div><div class="menu-item-body"><div class="mi-name">Basil Pesto</div><div class="mi-note">Penne & exotic veggies or chicken cooked with traditional homemade pesto sauce served with garlic bread</div><div class="mi-meta"><span class="mi-price">₹279 / ₹289</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍝</div><div class="menu-item-body"><div class="mi-name">Aglio E Olio</div><div class="mi-note">Spaghetti tossed in garlic, crushed chili & extra virgin olive oil with exotic veggies or chicken</div><div class="mi-meta"><span class="mi-price">₹279 / ₹289</span></div></div></div>
         <div class="menu-item reveal popular"><div class="menu-item-placeholder">🍝</div><div class="menu-item-body"><div class="mi-name">Spaghetti & Meatballs</div><div class="mi-note">Spaghetti & tender lamb meatballs cooked together in a homemade Italian spicy sauce</div><div class="mi-meta"><span class="mi-price">₹379</span><span class="mi-badge">Popular</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥟</div><div class="menu-item-body"><div class="mi-name">Ravioli Spinach & Corn</div><div class="mi-note">Fresh homemade spinach & corn ravioli tossed in Alfredo sauce topped with European herbs served with garlic bread</div><div class="mi-meta"><span class="mi-price">₹329</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🥟</div><div class="menu-item-body"><div class="mi-name">Chicken Ravioli With Bolognese Sauce</div><div class="mi-note">Intensely flavored homemade chicken ravioli tossed in a hearty minced meat sauce served with garlic bread</div><div class="mi-meta"><span class="mi-price">₹359</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥟</div><div class="menu-item-body"><div class="mi-name">Ravioli Spinach & Corn</div><div class="mi-note">Fresh homemade spinach & corn ravioli tossed in Alfredo sauce topped with European herbs served with garlic bread</div><div class="mi-meta"><span class="mi-price">₹329</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍝</div><div class="menu-item-body"><div class="mi-name">Aglio E Olio</div><div class="mi-note">Spaghetti tossed in garlic, crushed chili & extra virgin olive oil with exotic veggies or chicken</div><div class="mi-meta"><span class="mi-price">₹279 / 289</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍝</div><div class="menu-item-body"><div class="mi-name">Alfredo</div><div class="mi-note">Exotic veggies or chicken & penne cooked in a delicious homemade Alfredo sauce topped with black olives & Parmesan</div><div class="mi-meta"><span class="mi-price">₹279 / 289</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍝</div><div class="menu-item-body"><div class="mi-name">Arrabiata</div><div class="mi-note">Exotic veggies or chicken & penne cooked with rich & spicy Italian sauce</div><div class="mi-meta"><span class="mi-price">₹279 / 289</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🌿</div><div class="menu-item-body"><div class="mi-name">Basil Pesto</div><div class="mi-note">Penne & exotic veggies or chicken cooked with traditional homemade pesto sauce served with garlic bread</div><div class="mi-meta"><span class="mi-price">₹279 / 289</span></div></div></div>
       </div>
     </div>
 
     <!-- ASIAN -->
     <div class="menu-list" id="list-asian">
       <div class="menu-grid">
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥘</div><div class="menu-item-body"><div class="mi-name">Mongolian Chicken</div><div class="mi-note">Breast boneless julienne cut + homemade brown sauce + exotic veggies topped with sesame seeds & spring onions served with burnt garlic rice</div><div class="mi-meta"><span class="mi-price">₹289</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍖</div><div class="menu-item-body"><div class="mi-name">Mutton Namkeen</div><div class="mi-note">Lamb shanks with soup cooked with potato, whole garlic & green chillies served with taftan bread</div><div class="mi-meta"><span class="mi-price">₹429</span><span class="mi-badge limited">Limited</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🍜</div><div class="menu-item-body"><div class="mi-name">Ramen Bowl</div><div class="mi-note">Chicken based broth — ramen noodles + steamed exotic veggies + tender chicken strips + egg</div><div class="mi-meta"><span class="mi-price">₹299</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🥟</div><div class="menu-item-body"><div class="mi-name">Korean Bao</div><div class="mi-note">Freshly steamed bao + breaded chicken chunks mixed with homemade Korean style sweet sauce topped with sesame seeds served in a bamboo steamer</div><div class="mi-meta"><span class="mi-price">₹289</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍖</div><div class="menu-item-body"><div class="mi-name">Mutton Namkeen</div><div class="mi-note">Lamb shanks with soup cooked with potato, whole garlic & green chillies served with taftan bread</div><div class="mi-meta"><span class="mi-price">₹429</span></div></div></div>
       </div>
     </div>
 
     <!-- MEDITERRANEAN -->
     <div class="menu-list" id="list-mediterranean">
       <div class="menu-grid">
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥣</div><div class="menu-item-body"><div class="mi-name">Smoothie Bowl</div><div class="mi-note">Homemade flavoured yogurt base — mixed sliced fruits, honey + muesli + combine seeds</div><div class="mi-meta"><span class="mi-price">₹229</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥣</div><div class="menu-item-body"><div class="mi-name">Granola Bowl</div><div class="mi-note">Homemade yogurt base, honey mixed sliced fruits + granola dried berries + combine seeds</div><div class="mi-meta"><span class="mi-price">₹229</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🫓</div><div class="menu-item-body"><div class="mi-name">Pita Bread With Hummus</div><div class="mi-note">Homemade pita breads 2 pcs + a dip of homemade classic hummus + a dip of homemade beetroot hummus</div><div class="mi-meta"><span class="mi-price">₹139</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🇹🇷</div><div class="menu-item-body"><div class="mi-name">Turkish Lahmacun (Lamb) With Ayran</div><div class="mi-note">Flat crispy bread topped with minced lamb mixed with Turkish spices topped with sumac onion salad served with a glass of buttermilk</div><div class="mi-meta"><span class="mi-price">₹399</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥟</div><div class="menu-item-body"><div class="mi-name">Fatayer (Chicken) — Medium</div><div class="mi-note">Minced chicken + spinach & cheese + zaatar</div><div class="mi-meta"><span class="mi-price">₹279</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥟</div><div class="menu-item-body"><div class="mi-name">Fatayer (Lamb) — Large</div><div class="mi-note">Minced lamb + spinach & cheese + zaatar</div><div class="mi-meta"><span class="mi-price">₹569</span><span class="mi-badge limited">Limited</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🇹🇷</div><div class="menu-item-body"><div class="mi-name">Turkish Lahmacun (Lamb) With Ayran</div><div class="mi-note">Flat crispy bread topped with minced lamb mixed with Turkish spices topped with sumac onion salad served with a glass of buttermilk</div><div class="mi-meta"><span class="mi-price">₹399</span><span class="mi-badge limited">Limited</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🥟</div><div class="menu-item-body"><div class="mi-name">Fatayer (Chicken) — Large</div><div class="mi-note">Minced chicken + spinach & cheese + zaatar</div><div class="mi-meta"><span class="mi-price">₹379</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🥟</div><div class="menu-item-body"><div class="mi-name">Fatayer (Lamb) — Medium</div><div class="mi-note">Minced lamb + spinach & cheese + zaatar</div><div class="mi-meta"><span class="mi-price">₹369</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥟</div><div class="menu-item-body"><div class="mi-name">Fatayer (Lamb) — Large</div><div class="mi-note">Minced lamb + spinach & cheese + zaatar</div><div class="mi-meta"><span class="mi-price">₹569</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥟</div><div class="menu-item-body"><div class="mi-name">Fatayer (Chicken) — Medium</div><div class="mi-note">Minced chicken + spinach & cheese + zaatar</div><div class="mi-meta"><span class="mi-price">₹279</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🌭</div><div class="menu-item-body"><div class="mi-name">Chicken Cevapi With Cream Cheese Sauce</div><div class="mi-note">Homemade chicken skinless sausages Bosnia style topped with homemade cream cheese sauce</div><div class="mi-meta"><span class="mi-price">₹249</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥣</div><div class="menu-item-body"><div class="mi-name">Granola Bowl</div><div class="mi-note">Homemade yogurt base, honey mixed sliced fruits + granola dried berries + combine seeds</div><div class="mi-meta"><span class="mi-price">₹229</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🫓</div><div class="menu-item-body"><div class="mi-name">Pita Bread With Hummus</div><div class="mi-note">Homemade pita breads 2 pcs + a dip of homemade classic hummus + a dip of homemade beetroot hummus</div><div class="mi-meta"><span class="mi-price">₹139</span></div></div></div>
       </div>
     </div>
 
     <!-- MAINS -->
     <div class="menu-list" id="list-mains">
       <div class="menu-grid">
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍛</div><div class="menu-item-body"><div class="mi-name">Veg Stroganoff</div><div class="mi-note">Exotic combine veggies + homemade white sauce + cheese served with butter garlic rice</div><div class="mi-meta"><span class="mi-price">₹259</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🧈</div><div class="menu-item-body"><div class="mi-name">Paneer Makhani</div><div class="mi-note">Fresh n soft paneer cubes marinated with Indian spices, smoked & tossed in tomato base gravy + butter + cream served with taftan bread</div><div class="mi-meta"><span class="mi-price">₹229</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍛</div><div class="menu-item-body"><div class="mi-name">Chicken Stroganoff</div><div class="mi-note">Seasoned chicken breast pieces perfectly browned + homemade white sauce + cheese served with butter garlic rice</div><div class="mi-meta"><span class="mi-price">₹289</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🍗</div><div class="menu-item-body"><div class="mi-name">Chicken Roulade With BBQ Sauce</div><div class="mi-note">Stuffed & rolled chicken breast + cheese served with baked veggies topped with homemade barbecue sauce</div><div class="mi-meta"><span class="mi-price">₹299</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍛</div><div class="menu-item-body"><div class="mi-name">Chicken Stroganoff</div><div class="mi-note">Seasoned chicken breast pieces perfectly browned + homemade white sauce + cheese served with butter garlic rice</div><div class="mi-meta"><span class="mi-price">₹289</span></div></div></div>
         <div class="menu-item reveal popular"><div class="menu-item-placeholder">🧈</div><div class="menu-item-body"><div class="mi-name">Butter Chicken With Taftan</div><div class="mi-note">Chunks of grilled chicken marinated with Indian spices n smoked tossed in tomato base gravy + butter + cream served with taftan bread</div><div class="mi-meta"><span class="mi-price">₹279</span><span class="mi-badge">Popular</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🧈</div><div class="menu-item-body"><div class="mi-name">Paneer Makhani</div><div class="mi-note">Fresh n soft paneer cubes marinated with Indian spices, smoked & tossed in tomato base gravy + butter + cream served with taftan bread</div><div class="mi-meta"><span class="mi-price">₹229</span></div></div></div>
       </div>
     </div>
 
     <!-- ADD ONS -->
     <div class="menu-list" id="list-addons">
       <div class="menu-grid">
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🧀</div><div class="menu-item-body"><div class="mi-name">Add On — Parmesan</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹60</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🫒</div><div class="menu-item-body"><div class="mi-name">Add On — Olives</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🌶️</div><div class="menu-item-body"><div class="mi-name">Add On — Jalapeño</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🐑</div><div class="menu-item-body"><div class="mi-name">Add On — Lamb</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹80</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🫓</div><div class="menu-item-body"><div class="mi-name">Add On — Taftan</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹40</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥪</div><div class="menu-item-body"><div class="mi-name">Add On — Mayo</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🧀</div><div class="menu-item-body"><div class="mi-name">Add On — Cheese</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥦</div><div class="menu-item-body"><div class="mi-name">Add On — Vegetables</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹40</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍄</div><div class="menu-item-body"><div class="mi-name">Add On — Mushroom</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">☕</div><div class="menu-item-body"><div class="mi-name">Add On — Shot</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹69</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">☕</div><div class="menu-item-body"><div class="mi-name">Add On — Coffee Shot</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹59</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🐔</div><div class="menu-item-body"><div class="mi-name">Add On — Chicken</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹50</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥚</div><div class="menu-item-body"><div class="mi-name">Add On — Egg</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🫓</div><div class="menu-item-body"><div class="mi-name">Add On — Taftan</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹40</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥦</div><div class="menu-item-body"><div class="mi-name">Add On — Vegetables</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹40</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🧈</div><div class="menu-item-body"><div class="mi-name">Add On — Butter</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🍦</div><div class="menu-item-body"><div class="mi-name">Add On — Ice Cream</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍫</div><div class="menu-item-body"><div class="mi-name">Add On — Chocolate Sauce</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">☕</div><div class="menu-item-body"><div class="mi-name">Add On — Shot</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹69</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥚</div><div class="menu-item-body"><div class="mi-name">Add On — Egg</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🍯</div><div class="menu-item-body"><div class="mi-name">Add On — Flavour</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">☕</div><div class="menu-item-body"><div class="mi-name">Add On — Coffee Shot</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹59</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍫</div><div class="menu-item-body"><div class="mi-name">Add On — Chocolate Sauce</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🫒</div><div class="menu-item-body"><div class="mi-name">Add On — Olives</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🌶️</div><div class="menu-item-body"><div class="mi-name">Add On — Jalapeño</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍄</div><div class="menu-item-body"><div class="mi-name">Add On — Mushroom</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥪</div><div class="menu-item-body"><div class="mi-name">Add On — Mayo</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🧀</div><div class="menu-item-body"><div class="mi-name">Add On — Cheese</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹30</span></div></div></div>
       </div>
     </div>
 
     <!-- BEVERAGES -->
     <div class="menu-list" id="list-beverages">
       <div class="menu-grid">
-        <div class="menu-item reveal" style="border-left:2px solid var(--green);padding-left:0.8rem;margin-bottom:0.3rem;"><div class="menu-item-body" style="flex:1;"><div class="mi-name" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--green-light);">Mojito</div><div class="mi-note">Classic refreshing drinks made from mint, lemon and choice of fruits for flavours</div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍹</div><div class="menu-item-body"><div class="mi-name">Virgin Mojito</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹139</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍉</div><div class="menu-item-body"><div class="mi-name">Watermelon Mojito</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍎</div><div class="menu-item-body"><div class="mi-name">Apple Mojito</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
-
         <div class="menu-item reveal" style="border-left:2px solid var(--green);padding-left:0.8rem;margin:0.8rem 0 0.3rem;"><div class="menu-item-body" style="flex:1;"><div class="mi-name" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--green-light);">Colada</div><div class="mi-note">Creamy drink made from cream of coconut or coconut milk served blended or shaken with ice</div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🥥</div><div class="menu-item-body"><div class="mi-name">The Backyard Colada</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹169</span><span class="mi-badge chef">Chef's Pick</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🥥</div><div class="menu-item-body"><div class="mi-name">Virgin Pina Colada</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹159</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🥥</div><div class="menu-item-body"><div class="mi-name">The Backyard Colada</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹169</span></div></div></div>
-
         <div class="menu-item reveal" style="border-left:2px solid var(--green);padding-left:0.8rem;margin:0.8rem 0 0.3rem;"><div class="menu-item-body" style="flex:1;"><div class="mi-name" style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--green-light);">Mocktails</div><div class="mi-note">Drinks made using juices, sodas, infused waters & non alcoholic ingredients</div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍅</div><div class="menu-item-body"><div class="mi-name">Virgin Bloody Mary</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🍸</div><div class="menu-item-body"><div class="mi-name">Virgin Margherita</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹139</span></div></div></div>
-        <div class="menu-item reveal"><div class="menu-item-placeholder">🔵</div><div class="menu-item-body"><div class="mi-name">Blue Hawaiian</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🍹</div><div class="menu-item-body"><div class="mi-name">Head Hunter</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹159</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍅</div><div class="menu-item-body"><div class="mi-name">Virgin Bloody Mary</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-placeholder">🍹</div><div class="menu-item-body"><div class="mi-name">Pomo Punch Nade</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🔵</div><div class="menu-item-body"><div class="mi-name">Blue Hawaiian</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍎</div><div class="menu-item-body"><div class="mi-name">Apple Mojito</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍉</div><div class="menu-item-body"><div class="mi-name">Watermelon Mojito</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹149</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍸</div><div class="menu-item-body"><div class="mi-name">Virgin Margherita</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹139</span></div></div></div>
+        <div class="menu-item reveal"><div class="menu-item-placeholder">🍹</div><div class="menu-item-body"><div class="mi-name">Virgin Mojito</div><div class="mi-note"></div><div class="mi-meta"><span class="mi-price">₹139</span></div></div></div>
       </div>
     </div>
 
@@ -1294,6 +1289,20 @@ footer{
 <style>
 #watermark{position:fixed;z-index:99999;font-size:clamp(0.55rem,2vw,0.7rem);color:rgba(255,215,0,0.35);letter-spacing:0.08em;font-weight:400;text-decoration:none;font-family:sans-serif;transition:color 0.3s;pointer-events:auto;text-shadow:0 0 6px rgba(0,0,0,0.5);}
 #watermark:hover{color:rgba(255,215,0,0.7);}
+
+/* Upsell overlay */
+.upsell-overlay{position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.upsell-overlay.active{opacity:1;pointer-events:auto;}
+.upsell-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;max-width:380px;width:90%;text-align:center;transform:scale(0.9) translateY(20px);transition:transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);}
+.upsell-overlay.active .upsell-card{transform:scale(1) translateY(0);}
+.upsell-card .uc-item{margin:0 0 0.5rem;font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;}
+.upsell-card .uc-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--text);margin:0 0 0.75rem;}
+.upsell-card .uc-offer{background:var(--gold-dim);border-radius:var(--radius-sm);padding:0.75rem 1rem;margin:0 0 1.25rem;}
+.upsell-card .uc-offer p{font-size:0.95rem;color:var(--gold);font-weight:600;margin:0;}
+.upsell-card .uc-offer small{display:block;font-size:0.7rem;color:var(--text-muted);font-weight:400;margin-top:0.2rem;}
+.upsell-card .uc-close-wrap{margin-top:1.25rem;}
+.upsell-card .uc-close{display:inline-flex;align-items:center;gap:0.4rem;background:var(--gold-dim);color:var(--gold);border:none;border-radius:50px;padding:0.55rem 1.4rem;font-size:0.8rem;font-weight:500;cursor:pointer;transition:all 0.25s;font-family:inherit;letter-spacing:0.02em;}
+.upsell-card .uc-close:hover{background:var(--gold);color:var(--text);}
 </style>
 <script>
 (function(){const w=document.getElementById('watermark');let x=Math.max(10,window.innerWidth-160),y=Math.max(10,window.innerHeight-40),dx=0.6,dy=0.4,paused=false,id;w.style.left=x+'px';w.style.top=y+'px';w.addEventListener('mouseenter',()=>{paused=true;if(id)cancelAnimationFrame(id);});w.addEventListener('mouseleave',()=>{paused=false;move();});function move(){if(paused)return;x+=dx;y+=dy;if(x<=10||x>=window.innerWidth-140)dx*=-1;if(y<=10||y>=window.innerHeight-30)dy*=-1;w.style.left=x+'px';w.style.top=y+'px';id=requestAnimationFrame(move);}move();window.addEventListener('resize',()=>{if(x>window.innerWidth-140)x=window.innerWidth-160;if(y>window.innerHeight-30)y=window.innerHeight-40;});})();
@@ -1338,6 +1347,21 @@ footer{
   </div>
 </footer>
 
+<!-- UPSELL OVERLAY -->
+<div class="upsell-overlay" id="upsellOverlay">
+  <div class="upsell-card">
+    <div class="uc-item" id="ucItemName"></div>
+    <div class="uc-title">Pair it with</div>
+    <div class="uc-offer">
+      <p><span id="ucCombo">Add fries + drink</span> <span id="ucPrice">+₹99</span></p>
+      <small id="ucDesc">Crispy golden fries + your choice of any beverage</small>
+    </div>
+    <div class="uc-close-wrap">
+      <button class="uc-close" onclick="closeUpsell()">✕ Sounds good</button>
+    </div>
+  </div>
+</div>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
@@ -1350,7 +1374,7 @@ footer{
 <script>
 // ====== LOADER ======
 window.addEventListener('load',()=>{
-  setTimeout(()=>document.getElementById('loader').classList.add('hidden'),800);
+  setTimeout(()=>document.getElementById('loader').classList.add('hidden'),300);
 });
 
 // ====== NAV SCROLL ======
@@ -1527,6 +1551,49 @@ function closeLightbox(e){
   document.body.style.overflow='';
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+// ====== UPSELL ======
+const categoryCombos={
+  sides:{title:'Add gourmet dip + craft soda',desc:'Choose from ranch, chipotle, or blue cheese + any beverage'},
+  starters:{title:'Add garlic bread + beverage',desc:'Freshly baked garlic bread + your choice of any beverage'},
+  salads:{title:'Add grilled chicken + beverage',desc:'Herb-marinated grilled chicken strips + any beverage'},
+  sandwiches:{title:'Add fries + beverage',desc:'Crispy golden fries + your choice of any beverage'},
+  panini:{title:'Add soup + beverage',desc:'Warm cup of soup + your choice of any beverage'},
+  burgers:{title:'Add loaded fries + shake',desc:'Loaded cheese fries + any milkshake of your choice'},
+  wings:{title:'Add dip + beverage',desc:'Choose ranch or blue cheese dip + any beverage'},
+  pasta:{title:'Add garlic bread + beverage',desc:'Freshly baked garlic bread + your choice of any beverage'},
+  asian:{title:'Add spring roll + beverage',desc:'Crispy spring rolls + your choice of any beverage'},
+  mediterranean:{title:'Add pita & hummus + beverage',desc:'Warm pita with creamy hummus + any beverage'},
+  mains:{title:'Add side + beverage',desc:'Choose seasonal vegetables or fries + any beverage'},
+  addons:{title:'Add dessert',desc:'Finish with a scoop of ice cream or a brownie'},
+  beverages:{title:'Add cookie + coffee shot',desc:'Freshly baked cookie + an extra shot of espresso'},
+};
+function openUpsell(name,price,cat){
+  const combo=categoryCombos[cat]||categoryCombos.sides;
+  const addPrice=price<200?59:price<350?79:99;
+  document.getElementById('ucItemName').textContent=name;
+  document.getElementById('ucCombo').textContent=combo.title;
+  document.getElementById('ucDesc').textContent=combo.desc;
+  document.getElementById('ucPrice').textContent='+₹'+addPrice;
+  document.getElementById('upsellOverlay').classList.add('active');
+}
+function closeUpsell(){
+  document.getElementById('upsellOverlay').classList.remove('active');
+}
+document.querySelectorAll('.menu-item-body').forEach(el=>{
+  el.addEventListener('click',function(e){
+    if(e.target.closest('.menu-item-img'))return;
+    const menuList=this.closest('.menu-list');
+    const cat=menuList?menuList.id.replace('list-',''):'sides';
+    const name=this.querySelector('.mi-name')?.textContent||'';
+    const price=this.querySelector('.mi-price')?.textContent||'0';
+    const maxPrice=Math.max(...price.split('/').map(Number));
+    openUpsell(name,maxPrice,cat);
+  });
+});
+document.getElementById('upsellOverlay').addEventListener('click',function(e){
+  if(e.target===this)closeUpsell();
+});
 
 </script>
 </body>
