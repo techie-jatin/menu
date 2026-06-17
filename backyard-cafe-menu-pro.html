@@ -906,7 +906,7 @@ footer{
     .reviews-strip h4{font-size:0.85rem;}
   footer{padding:1.5rem 1rem 1rem;}
   .footer-inner{grid-template-columns:1fr;gap:1.2rem;}
-  .footer-bottom{flex-direction:column;gap:0.3rem;}
+  .footer-bottom{flex-direction:column;gap:0.3rem;text-align:center;align-items:center;}
 }
 
 @media(max-height:500px){
@@ -922,6 +922,8 @@ footer{
   background:rgba(0,0,0,0.75);
   opacity:0;pointer-events:none;
   transition:opacity 0.35s ease;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
 }
 .lightbox.open{opacity:1;pointer-events:auto;}
 .lightbox-box{
@@ -1582,10 +1584,11 @@ document.getElementById('upsellOverlay').addEventListener('click',function(e){
     lbImg.src=img.src;
     lbCap.textContent=name;
     lb.classList.add('open');
+    document.body.style.overflow='hidden';
   });
-  lbClose.addEventListener('click',function(){lb.classList.remove('open');});
-  lb.addEventListener('click',function(e){if(e.target===this)lb.classList.remove('open');});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('open');});
+  lbClose.addEventListener('click',function(){lb.classList.remove('open');document.body.style.overflow='';});
+  lb.addEventListener('click',function(e){if(e.target===this){lb.classList.remove('open');document.body.style.overflow='';}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){lb.classList.remove('open');document.body.style.overflow='';}});
 })();
 
 </script>
