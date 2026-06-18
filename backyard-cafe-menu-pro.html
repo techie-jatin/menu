@@ -488,10 +488,18 @@ nav.scrolled{
 .cat-tab.active{
   background:var(--green);border-color:var(--green);color:var(--text);
 }
+.mobile-cat-label{display:none;}
 
 /* Menu list */
 .menu-list{display:none;animation:fadeSlide 0.35s ease;}
 .menu-list.active{display:block;}
+.category-heading{
+  font-family:'Playfair Display',serif;
+  font-size:1.2rem;font-weight:600;
+  color:var(--green-light);margin-bottom:1rem;
+  padding-bottom:0.4rem;border-bottom:1px solid var(--border);
+  font-style:italic;
+}
 @keyframes fadeSlide{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
 .menu-grid{
@@ -889,8 +897,40 @@ footer{
   .featured-nav{display:none;}
   .menu-section-inner{padding:0 1rem;}
   .menu-header{flex-direction:column;align-items:flex-start;gap:0.3rem;}
-  .cat-tabs{gap:0.3rem;}
+  .cat-tabs{display:none;}
   .cat-tab{font-size:0.55rem;padding:0.45rem 0.9rem;}
+
+  /* Mobile category floating panel */
+  .mobile-cat-toggle{
+    position:fixed;bottom:24px;right:20px;z-index:999;
+    width:56px;height:56px;border-radius:50%;
+    background:var(--green);color:var(--text);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.35);
+    cursor:pointer;border:none;transition:transform 0.2s;
+  }
+  .mobile-cat-toggle:active{transform:scale(0.9);}
+  .mobile-cat-panel{
+    position:fixed;bottom:92px;right:20px;z-index:998;
+    background:var(--card);border:1px solid var(--border);
+    border-radius:16px;padding:0.4rem;
+    transform:scale(0);transform-origin:bottom right;
+    transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    box-shadow:0 8px 30px rgba(0,0,0,0.4);
+    display:flex;flex-direction:column;gap:2px;
+    min-width:175px;max-height:60vh;overflow-y:auto;
+  }
+  .mobile-cat-panel.open{transform:scale(1);}
+  .mobile-cat-panel button{
+    background:none;border:none;padding:0.6rem 1rem;
+    text-align:left;font-size:0.6rem;font-weight:500;
+    color:var(--text-dim);cursor:pointer;border-radius:10px;
+    transition:all 0.2s;white-space:nowrap;
+    font-family:'DM Sans',sans-serif;letter-spacing:0.05em;
+  }
+  .mobile-cat-panel button:active{background:var(--card-hover);}
+  .mobile-cat-panel button.active{background:var(--green);color:var(--text);font-weight:600;}
+  .mobile-cat-label{display:block;font-size:0.85rem;font-weight:600;color:var(--green-light);padding-top:0.8rem;margin:0 0 1.2rem;font-style:italic;font-family:'Playfair Display',serif;}
   .menu-item-img,.menu-item-placeholder{width:68px;height:68px;}
   .menu-item-placeholder{font-size:1rem;}
   .menu-item-body .mi-name{font-size:0.85rem;}
@@ -1064,8 +1104,11 @@ footer{
     </div>
     <p style="font-size:0.65rem;color:var(--text-dim);margin:-1.5rem 0 1.5rem;font-weight:300;border-left:2px solid var(--green);padding-left:0.8rem;">To ensure you absolutely enjoy your dish, we'll need 15 minutes to prepare an absolute delight.</p>
 
+    <div class="mobile-cat-label">All Items</div>
+
     <div class="cat-tabs reveal reveal-d1">
-      <button class="cat-tab active" data-cat="salads">Salads</button>
+      <button class="cat-tab active" data-cat="all">All Items</button>
+      <button class="cat-tab" data-cat="salads">Salads</button>
       <button class="cat-tab" data-cat="soups">Soups</button>
       <button class="cat-tab" data-cat="sides">Sides</button>
       <button class="cat-tab" data-cat="appetizers">Appetizers</button>
@@ -1078,6 +1121,7 @@ footer{
     </div>
 
     <div class="menu-list active" id="list-salads">
+      <div class="category-heading">Salads</div>
       <div class="menu-grid">
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Caesar Salad</div><div class="mi-note">Crisp romaine lettuce tossed in creamy dressing with croutons and parmesan.</div><div class="mi-meta"><span class="mi-price">₹279</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-img"><img onerror="this.onerror=null;this.src='food.png'" src="c-image/Glass noodles.jpg" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Asian Glass Noodle Salad</div><div class="mi-tags"><span class="mi-badge bs">Best Seller</span> <img src="gluten-free.png" class="mi-badge-icon" alt="GF"> <img src="lactose-free.png" class="mi-badge-icon" alt="LF"></div><div class="mi-note">Light glass noodles with crunchy vegetables and a tangy Asian dressing.</div><div class="mi-meta"><span class="mi-price">₹279</span></div></div></div>
@@ -1087,7 +1131,8 @@ footer{
       </div>
     </div>
 
-    <div class="menu-list" id="list-soups">
+    <div class="menu-list active" id="list-soups">
+      <div class="category-heading">Soups</div>
       <div class="menu-grid">
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Lemon Pepper Soup</div><div class="mi-tags"><img src="gluten-free.png" class="mi-badge-icon" alt="GF"> <img src="lactose-free.png" class="mi-badge-icon" alt="LF"></div><div class="mi-note">A zesty, clear vegetable broth infused with fresh lemon and black pepper.</div><div class="mi-meta"><span class="mi-price">₹199</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Roasted Tomato &amp; Basil Soup</div><div class="mi-tags"><img src="gluten-free.png" class="mi-badge-icon" alt="GF"></div><div class="mi-note">A velvety blend of slow-roasted tomatoes, fresh basil, and cream.</div><div class="mi-meta"><span class="mi-price">₹199</span></div></div></div>
@@ -1096,7 +1141,8 @@ footer{
       </div>
     </div>
 
-    <div class="menu-list" id="list-sides">
+    <div class="menu-list active" id="list-sides">
+      <div class="category-heading">Sides</div>
       <div class="menu-grid">
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Salted Fries</div><div class="mi-tags"><img src="gluten-free.png" class="mi-badge-icon" alt="GF"> <img src="lactose-free.png" class="mi-badge-icon" alt="LF"></div><div class="mi-note">Golden, crispy, thick-cut potato fries lightly seasoned with sea salt.</div><div class="mi-meta"><span class="mi-price">₹199</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Peri Peri Fries</div><div class="mi-tags"><img src="gluten-free.png" class="mi-badge-icon" alt="GF"> <img src="lactose-free.png" class="mi-badge-icon" alt="LF"></div><div class="mi-note">Crispy fries tossed in a fiery, smoky African peri-peri spice blend.</div><div class="mi-meta"><span class="mi-price">₹219</span></div></div></div>
@@ -1105,7 +1151,8 @@ footer{
       </div>
     </div>
 
-    <div class="menu-list" id="list-appetizers">
+    <div class="menu-list active" id="list-appetizers">
+      <div class="category-heading">Appetizers</div>
       <div class="menu-grid">
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Garlic Butter Parmesan Chicken Tenders</div><div class="mi-note">Crispy chicken tenders tossed in rich garlic butter and parmesan.</div><div class="mi-meta"><span class="mi-price">₹329</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Teriyaki Chicken</div><div class="mi-tags"><img src="lactose-free.png" class="mi-badge-icon" alt="LF"></div><div class="mi-note">Tender chicken chunks glazed in a sweet, savory Japanese teriyaki sauce.</div><div class="mi-meta"><span class="mi-price">₹329</span></div></div></div>
@@ -1124,7 +1171,8 @@ footer{
       </div>
     </div>
 
-    <div class="menu-list" id="list-mains">
+    <div class="menu-list active" id="list-mains">
+      <div class="category-heading">Mains</div>
       <div class="menu-grid">
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Chicken Steak In Paprika Sauce</div><div class="mi-tags"><img src="gluten-free.png" class="mi-badge-icon" alt="GF"></div><div class="mi-note">Grilled chicken breast smothered in a creamy, mildly spicy paprika sauce.</div><div class="mi-meta"><span class="mi-price">₹399</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Chicken Steak In Creamy Mushroom Sauce</div><div class="mi-note">Seared chicken breast drenched in a rich, velvety wild mushroom sauce.</div><div class="mi-meta"><span class="mi-price">₹399</span></div></div></div>
@@ -1142,7 +1190,8 @@ footer{
       </div>
     </div>
 
-    <div class="menu-list" id="list-pasta-risotto">
+    <div class="menu-list active" id="list-pasta-risotto">
+      <div class="category-heading">Pasta &amp; Risotto</div>
       <div class="menu-grid">
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Alfredo Rigatoni/Penne</div><div class="mi-note">Tubular pasta smothered in a rich, buttery heavy cream and parmesan sauce.</div><div class="mi-meta"><span class="mi-price">₹329</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Arrabiata Rigatoni/Penne</div><div class="mi-note">Pasta tossed in a fiery, robust tomato sauce with garlic and chili flakes.</div><div class="mi-meta"><span class="mi-price">₹329</span></div></div></div>
@@ -1157,7 +1206,8 @@ footer{
       </div>
     </div>
 
-    <div class="menu-list" id="list-flatbread">
+    <div class="menu-list active" id="list-flatbread">
+      <div class="category-heading">Flatbread</div>
       <div class="menu-grid">
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Margherita Flatbread</div><div class="mi-note">Vibrant tomato sauce base with fresh mozzarella cheese and fresh basil.</div><div class="mi-meta"><span class="mi-price">₹349</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Backyards Summer Veggie Flatbread</div><div class="mi-note">Seasonal flatbread topped with crisp, charred summer vegetables and cheese.</div><div class="mi-meta"><span class="mi-price">₹399</span></div></div></div>
@@ -1170,7 +1220,8 @@ footer{
       </div>
     </div>
 
-    <div class="menu-list" id="list-burgers-sando">
+    <div class="menu-list active" id="list-burgers-sando">
+      <div class="category-heading">Burgers &amp; Sando</div>
       <div class="menu-grid">
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">The Daily Veg Harissa Sando</div><div class="mi-note">Vegetarian patty layered with a smoky, spicy North African harissa spread.</div><div class="mi-meta"><span class="mi-price">₹249</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Bombay Veg Sando</div><div class="mi-note">Street-style sandwich with sliced potatoes, beets, cucumbers, and mint chutney.</div><div class="mi-meta"><span class="mi-price">₹249</span></div></div></div>
@@ -1184,7 +1235,8 @@ footer{
       </div>
     </div>
 
-    <div class="menu-list" id="list-kids-menu">
+    <div class="menu-list active" id="list-kids-menu">
+      <div class="category-heading">Kids Menu</div>
       <div class="menu-grid">
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Mac n Cheese</div><div class="mi-note">Classic, creamy, and cheesy oven-baked macaroni pasta.</div><div class="mi-meta"><span class="mi-price">₹329</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Veg Sliders</div><div class="mi-note">Mini burger buns stuffed with a savory, mild vegetable patty and cheese.</div><div class="mi-meta"><span class="mi-price">₹249</span></div></div></div>
@@ -1195,7 +1247,8 @@ footer{
       </div>
     </div>
 
-    <div class="menu-list" id="list-breakfast">
+    <div class="menu-list active" id="list-breakfast">
+      <div class="category-heading">Breakfast</div>
       <div class="menu-grid">
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Eggs Your Way</div><div class="mi-tags"><img src="lactose-free.png" class="mi-badge-icon" alt="LF"></div><div class="mi-note">Fresh eggs prepared to order: fried, sunny-side up, scrambled, or poached.</div><div class="mi-meta"><span class="mi-price">₹199</span></div></div></div>
         <div class="menu-item reveal"><div class="menu-item-img"><img src="food.png" alt="" loading="lazy"></div><div class="menu-item-body"><div class="mi-name">Turkish Eggs</div><div class="mi-note">Poached eggs served over a bed of garlic-infused yogurt, drizzled with warm chili butter.</div><div class="mi-meta"><span class="mi-price">₹249</span></div></div></div>
@@ -1363,6 +1416,21 @@ footer{
   </div>
 </div>
 
+<button class="mobile-cat-toggle" id="catToggle" aria-label="Menu categories">☰</button>
+<div class="mobile-cat-panel" id="catPanel">
+  <button class="m-cat active" data-cat="all">All Items</button>
+  <button class="m-cat" data-cat="salads">Salads</button>
+  <button class="m-cat" data-cat="soups">Soups</button>
+  <button class="m-cat" data-cat="sides">Sides</button>
+  <button class="m-cat" data-cat="appetizers">Appetizers</button>
+  <button class="m-cat" data-cat="mains">Mains</button>
+  <button class="m-cat" data-cat="pasta-risotto">Pasta &amp; Risotto</button>
+  <button class="m-cat" data-cat="flatbread">Flatbread</button>
+  <button class="m-cat" data-cat="burgers-sando">Burgers &amp; Sando</button>
+  <button class="m-cat" data-cat="kids-menu">Kids Menu</button>
+  <button class="m-cat" data-cat="breakfast">Breakfast</button>
+</div>
+
 <div class="lightbox" id="lightbox">
   <div class="lightbox-box">
     <button class="lightbox-close" id="lightboxClose">&times;</button>
@@ -1491,8 +1559,14 @@ document.querySelectorAll('.cat-tab').forEach(tab=>{
     document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
     tab.classList.add('active');
     document.querySelectorAll('.menu-list').forEach(l=>l.classList.remove('active'));
-    const list=document.getElementById('list-'+tab.dataset.cat);
-    if(list)list.classList.add('active');
+    if(tab.dataset.cat==='all'){
+      document.querySelectorAll('.menu-list').forEach(l=>l.classList.add('active'));
+    }else{
+      const list=document.getElementById('list-'+tab.dataset.cat);
+      if(list)list.classList.add('active');
+    }
+    var mLab=document.querySelector('.mobile-cat-label');
+    if(mLab)mLab.textContent=tab.textContent;
   });
 });
 
@@ -1595,6 +1669,49 @@ document.getElementById('upsellOverlay').addEventListener('click',function(e){
   lbClose.addEventListener('click',function(){lb.classList.remove('open');document.body.style.overflow='';});
   lb.addEventListener('click',function(e){if(e.target===this){lb.classList.remove('open');document.body.style.overflow='';}});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){lb.classList.remove('open');document.body.style.overflow='';}});
+})();
+
+// ====== MOBILE CATEGORY FLOATING PANEL ======
+(function(){
+  var toggle=document.getElementById('catToggle');
+  var panel=document.getElementById('catPanel');
+  if(!toggle||!panel)return;
+  toggle.addEventListener('click',function(e){
+    e.stopPropagation();
+    panel.classList.toggle('open');
+  });
+  document.addEventListener('click',function(e){
+    if(!panel.contains(e.target)&&e.target!==toggle){
+      panel.classList.remove('open');
+    }
+  });
+  panel.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      // Sync panel buttons
+      panel.querySelectorAll('button').forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      // Sync hidden cat-tabs
+      document.querySelectorAll('.cat-tab').forEach(function(t){t.classList.remove('active');});
+      var targetTab=document.querySelector('.cat-tab[data-cat="'+btn.dataset.cat+'"]');
+      if(targetTab)targetTab.classList.add('active');
+      // Switch menu list
+      document.querySelectorAll('.menu-list').forEach(function(l){l.classList.remove('active');});
+      if(btn.dataset.cat==='all'){
+        document.querySelectorAll('.menu-list').forEach(function(l){l.classList.add('active');});
+      }else{
+        var list=document.getElementById('list-'+btn.dataset.cat);
+        if(list)list.classList.add('active');
+      }
+      // Update mobile label
+      var mLab=document.querySelector('.mobile-cat-label');
+      if(mLab)mLab.textContent=btn.textContent;
+      // Close panel
+      panel.classList.remove('open');
+      // Scroll to menu section
+      var menuSec=document.getElementById('menu');
+      if(menuSec)menuSec.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
 })();
 
 </script>
